@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "753705363375",
+    "firebase_url": "https://my-travel-wallet.firebaseio.com",
+    "project_id": "my-travel-wallet",
+    "storage_bucket": "my-travel-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753705363375:android:617124197d7e2c769bb15a",
+        "android_client_info": {
+          "package_name": "repur.ru.my_travel_wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753705363375-8qnuvqdau66medecqiulngib3dumujg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvcJwXZfv-kvDXVDDXart81J8fVEieZLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753705363375-8qnuvqdau66medecqiulngib3dumujg6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
