@@ -1,3 +1,8 @@
+layout: page
+title: "Privacy Policy"
+permalink: /privacy_policy/
+
+
 ## Privacy Policy
 
 Radomir Epur built the My Travel Wallet app as a Free app. This SERVICE is provided by Radomir Epur at no cost and is intended for use as is.
