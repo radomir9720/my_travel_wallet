@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
+//import 'package:my_travel_wallet/utilities/singleton.dart';
+
 
 class SettingsCard extends StatefulWidget {
   SettingsCard(
-      {@required this.title,
-      this.subTitle = "",
-      this.value = false,
-      this.function});
+      {@required this.title, this.subTitle, this.value, this.function});
 
   final String title;
   final String subTitle;
@@ -29,16 +28,19 @@ class _SettingsCardState extends State<SettingsCard> {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(widget.title),
-//      subtitle: Text(widget.subTitle),
-      trailing: Switch(
-          activeColor: kLightThemeSecondaryColor,
-          value: _switchValue,
-          onChanged: (bool) {
-            setState(() {
-              _switchValue = bool;
-            });
-            print("pressed. New value is $bool");
-          }),
+      subtitle: widget.subTitle == null ? null : Text(widget.subTitle),
+      trailing: widget.value == null
+          ? SizedBox()
+          : Switch(
+              activeColor: kLightThemeSecondaryColor,
+              value: _switchValue,
+              onChanged: (bool) {
+                setState(() {
+                  _switchValue = bool;
+
+                });
+                widget.function();
+              }),
     );
   }
 }

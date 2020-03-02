@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+
+  HomePage({this.key});
+
+  final Key key;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -12,6 +17,7 @@ class _HomePageState extends State<HomePage> {
         body: CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
+          backgroundColor: Colors.black,
             expandedHeight: 200.0,
             flexibleSpace: const FlexibleSpaceBar(
               title: Text('Мои путешествия'),
@@ -21,9 +27,9 @@ class _HomePageState extends State<HomePage> {
               MaterialButton(
                 child: Row(
                   children: <Widget>[
-                    Text("Войти"),
+                    Text("Войти", style: TextStyle(color: Colors.white),),
                     SizedBox(width: 3.0,),
-                    Icon(Icons.account_circle, size: 40.0,),
+                    Icon(Icons.account_circle, size: 40.0, color: Colors.white,),
                   ],
                 ),
                 onPressed: () {},
