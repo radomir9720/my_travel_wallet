@@ -4,8 +4,7 @@ import 'package:my_travel_wallet/pages/home_page.dart';
 import 'package:my_travel_wallet/tabs/bottom_navigation_bar.dart';
 import 'package:my_travel_wallet/tabs/bottom_navigation_bar_button.dart';
 import 'package:my_travel_wallet/pages/settings_page.dart';
-//import 'package:my_travel_wallet/utilities/singleton.dart';
-import 'package:my_travel_wallet/utilities/shared_preferences.dart';
+import 'package:my_travel_wallet/main.dart';
 
 class MainTabView extends StatefulWidget {
   final PageStorageBucket bucket = PageStorageBucket();
@@ -18,10 +17,11 @@ void updatePageStorage(PageStorageKey key, context) {
   pages[key.value] =
       PageStorage.of(context).readState(context, identifier: ValueKey(key));
 }
-MySharedPreferences mySharedPreferences = MySharedPreferences();
+
+//MySharedPreferences mySharedPreferences = MySharedPreferences();
+
 class _MainTabViewState extends State<MainTabView>
     with SingleTickerProviderStateMixin {
-
   TabController _tabController;
   Widget _homePage;
   Widget _currencyPage;
@@ -30,10 +30,7 @@ class _MainTabViewState extends State<MainTabView>
   @override
   void initState() {
     super.initState();
-    mySharedPreferences.init();
-//    if (Singleton.themeMode == null) {
-//      Singleton.themeMode = true;
-//    }
+//    mySharedPreferences.init();
 
     _homePage = HomePage(
       key: PageStorageKey(0),
@@ -58,6 +55,11 @@ class _MainTabViewState extends State<MainTabView>
       pages[_tabController.previousIndex] = PageStorage.of(context).readState(
           context,
           identifier: ValueKey(_tabController.previousIndex));
+      setState(() {});
+    });
+
+    mySharedPreferences.addListener(() {
+      if (this.mounted) setState(() {});
     });
   }
 
@@ -82,12 +84,27 @@ class _MainTabViewState extends State<MainTabView>
       bottomNavigationBar: CustomBottomNavigationBar(
         items: [
           CustomBottomNavigationBarButton(
-              icon: Icons.home, function: () => _tabController.index = 0),
+//            isActive: _tabController.index == 0,
+            color: _tabController.index == 0
+                ? mySharedPreferences.getThemeAccentColor()
+                : mySharedPreferences.getThirdThemeColor(),
+            icon: Icons.home,
+            function: () => _tabController.index = 0,
+          ),
           CustomBottomNavigationBarButton(
+              color: _tabController.index == 1
+                  ? mySharedPreferences.getThemeAccentColor()
+                  : mySharedPreferences.getThirdThemeColor(),
+//              isActive: _tabController.index == 1,
               icon: Icons.attach_money,
               function: () => _tabController.index = 1),
           CustomBottomNavigationBarButton(
-              icon: Icons.settings, function: () => _tabController.index = 2),
+              color: _tabController.index == 2
+                  ? mySharedPreferences.getThemeAccentColor()
+                  : mySharedPreferences.getThirdThemeColor(),
+//              isActive: _tabController.index == 2,
+              icon: Icons.settings,
+              function: () => _tabController.index = 2),
         ],
       ),
     );

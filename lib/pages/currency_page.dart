@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/main.dart';
 
 class CurrencyPage extends StatelessWidget {
   CurrencyPage({this.key});
@@ -7,7 +8,7 @@ class CurrencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color: mySharedPreferences.getSecondaryThemeColor(),
     );
   }
 }

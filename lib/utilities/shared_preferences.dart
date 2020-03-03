@@ -1,14 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_travel_wallet/constants.dart';
 
-class MySharedPreferences {
 
+class MySharedPreferences extends ChangeNotifier {
   SharedPreferences _prefs;
 
-  void init() async {
+  Future<bool> init() async {
     _prefs = await SharedPreferences.getInstance();
-    if (await _prefs.getBool('lightTheme') == null) await _prefs.setBool('lightTheme', true);
-    _switchThemeValue = await _prefs.getBool('lightTheme');
-    print(_switchThemeValue);
+    _switchThemeValue = await _prefs.getBool(kDarkThemeKey) ?? false;
+    return _switchThemeValue != null;
   }
 
   bool _switchThemeValue;
@@ -19,12 +20,21 @@ class MySharedPreferences {
 
   void setSwitchThemeValue(bool value) {
     _switchThemeValue = value;
+    notifyListeners();
   }
+
+  Color getMainThemeColor() => _switchThemeValue ? kDarkThemeMainColor : kLightThemeMainColor;
+
+  Color getSecondaryThemeColor() => _switchThemeValue ? kDarkThemeSecondaryColor : kLightThemeSecondaryColor;
+
+  Color getThirdThemeColor() => _switchThemeValue ? kDarkThemeThirdColor : kLightThemeThirdColor;
+
+  Color getThemeAccentColor() => _switchThemeValue ? kDarkThemeAccentColor : kLightThemeAccentColor;
+
+  TextStyle getMainTextStyle() => _switchThemeValue ? kDarkThemeMainTextStyle : kLightThemeMainTextStyle;
 
   void dispose() async {
-    await _prefs.setBool('lightTheme', _switchThemeValue);
-
+    await _prefs.setBool(kDarkThemeKey, _switchThemeValue);
   }
-
-
 }
+

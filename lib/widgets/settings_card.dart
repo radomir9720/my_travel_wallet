@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
-//import 'package:my_travel_wallet/utilities/singleton.dart';
-
+import 'package:my_travel_wallet/main.dart';
 
 class SettingsCard extends StatefulWidget {
   SettingsCard(
@@ -26,21 +25,38 @@ class _SettingsCardState extends State<SettingsCard> {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(widget.title),
-      subtitle: widget.subTitle == null ? null : Text(widget.subTitle),
-      trailing: widget.value == null
-          ? SizedBox()
-          : Switch(
-              activeColor: kLightThemeSecondaryColor,
-              value: _switchValue,
-              onChanged: (bool) {
-                setState(() {
-                  _switchValue = bool;
-
-                });
-                widget.function();
-              }),
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            widget.title,
+            style: mySharedPreferences.getMainTextStyle(),
+          ),
+          subtitle: widget.subTitle == null
+              ? null
+              : Text(
+                  widget.subTitle,
+                  style: mySharedPreferences.getMainTextStyle(),
+                ),
+          trailing: widget.value == null
+              ? SizedBox()
+              : Switch(
+                  activeColor: mySharedPreferences.getThemeAccentColor(),
+                  value: _switchValue,
+                  onChanged: (bool) {
+                    setState(() {
+                      _switchValue = bool;
+                    });
+                    widget.function();
+                  }),
+        ),
+        Divider(
+          color: mySharedPreferences.getThemeAccentColor(),
+          height: 0.0,
+          indent: kStartIndentDividerValue,
+          endIndent: kEndIndentDividerValue,
+        ),
+      ],
     );
   }
 }

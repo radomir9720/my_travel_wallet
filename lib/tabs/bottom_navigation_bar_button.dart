@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
 
 class CustomBottomNavigationBarButton extends StatelessWidget {
-
-  CustomBottomNavigationBarButton({@required this.icon, @required this.function});
+  CustomBottomNavigationBarButton(
+      {@required this.icon, @required this.function, @required this.color});
 
   final Function function;
   final IconData icon;
+  final Color color;
 
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: MaterialButton(
@@ -18,7 +18,10 @@ class CustomBottomNavigationBarButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(100.0),
         ),
         onPressed: function,
-        child: Icon(icon),
+        child: Icon(
+          icon,
+          color: color,
+        ),
       ),
     );
   }
