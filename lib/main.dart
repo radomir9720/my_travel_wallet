@@ -4,14 +4,14 @@ import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
 
 void main() => runApp(MyTravelWallet());
-MySharedPreferences mySharedPreferences = MySharedPreferences();
+MySharedPreferences prefs = MySharedPreferences();
 
 class MyTravelWallet extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-      future: mySharedPreferences.init(),
+      future: prefs.init(),
       builder: (context, snap) {
         if (snap.connectionState == ConnectionState.done) {
           return MaterialApp(

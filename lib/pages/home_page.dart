@@ -15,12 +15,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mySharedPreferences.getSecondaryThemeColor(),
+      backgroundColor: prefs.getSecondaryThemeColor(),
       appBar: AppBar(
-        backgroundColor: mySharedPreferences.getMainThemeColor(),
+        backgroundColor: prefs.getMainThemeColor(),
         title: Text(
           "Мои путешествия",
-          style: mySharedPreferences.getMainTextStyle(),
+          style: prefs.getMainTextStyle(),
         ),
         actions: <Widget>[
           MaterialButton(
@@ -31,14 +31,14 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Text(
                   "ВОЙТИ",
-                  style: mySharedPreferences.getMainTextStyle(),
+                  style: prefs.getMainTextStyle(),
                 ),
                 SizedBox(
                   width: 3.0,
                 ),
                 Icon(
                   Icons.account_circle,
-                  color: mySharedPreferences.getThirdThemeColor(),
+                  color: prefs.getThirdThemeColor(),
                   size: 40.0,
                 ),
               ],

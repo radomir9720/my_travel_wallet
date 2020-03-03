@@ -30,18 +30,18 @@ class _SettingsCardState extends State<SettingsCard> {
         ListTile(
           title: Text(
             widget.title,
-            style: mySharedPreferences.getMainTextStyle(),
+            style: prefs.getMainTextStyle(),
           ),
           subtitle: widget.subTitle == null
               ? null
               : Text(
                   widget.subTitle,
-                  style: mySharedPreferences.getMainTextStyle(),
+                  style: prefs.getMainTextStyle(),
                 ),
           trailing: widget.value == null
               ? SizedBox()
               : Switch(
-                  activeColor: mySharedPreferences.getThemeAccentColor(),
+                  activeColor: prefs.getThemeAccentColor(),
                   value: _switchValue,
                   onChanged: (bool) {
                     setState(() {
@@ -51,7 +51,7 @@ class _SettingsCardState extends State<SettingsCard> {
                   }),
         ),
         Divider(
-          color: mySharedPreferences.getThemeAccentColor(),
+          color: prefs.getThemeAccentColor(),
           height: 0.0,
           indent: kStartIndentDividerValue,
           endIndent: kEndIndentDividerValue,

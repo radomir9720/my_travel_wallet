@@ -16,7 +16,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       shadowColor: Colors.black,
 //      height: 60.0,
       child: Container(
-        color: mySharedPreferences.getMainThemeColor(),
+        color: prefs.getMainThemeColor(),
         height: kCustomBottomNavigationBarButtonHeight +
             kCustomBottomNavigationBarBorderHeight,
         child: Column(
@@ -24,7 +24,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             SizedBox(
               height: kCustomBottomNavigationBarBorderHeight,
               child: Container(
-                color: mySharedPreferences.getThemeAccentColor(),
+                color: prefs.getThemeAccentColor(),
               ),
             ),
             Row(

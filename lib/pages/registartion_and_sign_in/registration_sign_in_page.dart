@@ -27,30 +27,30 @@ class _SignInPageState extends State<SignInPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mySharedPreferences.getSecondaryThemeColor(),
+      backgroundColor: prefs.getSecondaryThemeColor(),
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
-              color: mySharedPreferences.getThirdThemeColor(),
+              color: prefs.getThirdThemeColor(),
             ),
             onPressed: () => Navigator.pop(context)),
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: mySharedPreferences.getMainThemeColor(),
+        backgroundColor: prefs.getMainThemeColor(),
         title: Text(
           "Авторизация",
-          style: mySharedPreferences.getMainTextStyle(),
+          style: prefs.getMainTextStyle(),
         ),
         bottom: TabBar(
-          indicatorColor: mySharedPreferences.getThemeAccentColor(),
+          indicatorColor: prefs.getThemeAccentColor(),
           controller: _tabController,
           tabs: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 "Войти",
-                style: mySharedPreferences
+                style: prefs
                     .getMainTextStyle()
                     .copyWith(fontSize: 15.0),
               ),
@@ -58,7 +58,7 @@ class _SignInPageState extends State<SignInPage>
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text("Регистрация",
-                  style: mySharedPreferences
+                  style: prefs
                       .getMainTextStyle()
                       .copyWith(fontSize: 15.0)),
             )

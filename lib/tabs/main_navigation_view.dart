@@ -58,7 +58,7 @@ class _MainTabViewState extends State<MainTabView>
       setState(() {});
     });
 
-    mySharedPreferences.addListener(() {
+    prefs.addListener(() {
       if (this.mounted) setState(() {});
     });
   }
@@ -66,7 +66,7 @@ class _MainTabViewState extends State<MainTabView>
   @override
   void dispose() {
     super.dispose();
-    mySharedPreferences.dispose();
+    prefs.dispose();
     _tabController.dispose();
   }
 
@@ -86,22 +86,22 @@ class _MainTabViewState extends State<MainTabView>
           CustomBottomNavigationBarButton(
 //            isActive: _tabController.index == 0,
             color: _tabController.index == 0
-                ? mySharedPreferences.getThemeAccentColor()
-                : mySharedPreferences.getThirdThemeColor(),
+                ? prefs.getThemeAccentColor()
+                : prefs.getThirdThemeColor(),
             icon: Icons.home,
             function: () => _tabController.index = 0,
           ),
           CustomBottomNavigationBarButton(
               color: _tabController.index == 1
-                  ? mySharedPreferences.getThemeAccentColor()
-                  : mySharedPreferences.getThirdThemeColor(),
+                  ? prefs.getThemeAccentColor()
+                  : prefs.getThirdThemeColor(),
 //              isActive: _tabController.index == 1,
               icon: Icons.attach_money,
               function: () => _tabController.index = 1),
           CustomBottomNavigationBarButton(
               color: _tabController.index == 2
-                  ? mySharedPreferences.getThemeAccentColor()
-                  : mySharedPreferences.getThirdThemeColor(),
+                  ? prefs.getThemeAccentColor()
+                  : prefs.getThirdThemeColor(),
 //              isActive: _tabController.index == 2,
               icon: Icons.settings,
               function: () => _tabController.index = 2),

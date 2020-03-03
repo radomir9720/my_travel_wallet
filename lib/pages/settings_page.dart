@@ -15,8 +15,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    _themeSwitchValue = mySharedPreferences.getSwitchThemeValue();
-    mySharedPreferences.addListener(() {
+    _themeSwitchValue = prefs.getSwitchThemeValue();
+    prefs.addListener(() {
       if (this.mounted) setState(() {});
     });
     super.initState();
@@ -24,20 +24,20 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void dispose() {
-    mySharedPreferences.dispose();
+    prefs.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mySharedPreferences.getSecondaryThemeColor(),
+      backgroundColor: prefs.getSecondaryThemeColor(),
       appBar: AppBar(
         title: Text(
           "Настройки",
-          style: mySharedPreferences.getMainTextStyle(),
+          style: prefs.getMainTextStyle(),
         ),
-        backgroundColor: mySharedPreferences.getMainThemeColor(),
+        backgroundColor: prefs.getMainThemeColor(),
         centerTitle: true,
       ),
       body: ListView(
@@ -47,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
             value: _themeSwitchValue,
             function: () async {
               _themeSwitchValue = !_themeSwitchValue;
-              mySharedPreferences.setSwitchThemeValue(_themeSwitchValue);
+              prefs.setSwitchThemeValue(_themeSwitchValue);
             },
           ),
           SettingsCard(

@@ -8,7 +8,7 @@ class CurrencyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: mySharedPreferences.getSecondaryThemeColor(),
+      color: prefs.getSecondaryThemeColor(),
     );
   }
 }
