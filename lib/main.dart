@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_page.dart';
+import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_tab_view.dart';
 import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
 
@@ -15,6 +15,7 @@ class MyTravelWallet extends StatelessWidget {
       builder: (context, snap) {
         if (snap.connectionState == ConnectionState.done) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             routes: {
               SignInPage.id: (context) => SignInPage(),
             },

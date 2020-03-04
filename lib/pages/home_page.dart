@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/main.dart';
-import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_page.dart';
+import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_tab_view.dart';
+import 'package:my_travel_wallet/utilities/google_auth.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.key});
@@ -25,7 +26,10 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           MaterialButton(
             onPressed: () {
-              Navigator.pushNamed(context, SignInPage.id);
+              signInWithGoogle().whenComplete(
+                () {print("COMPLETE!");},
+              );
+//              Navigator.pushNamed(context, SignInPage.id);
             },
             child: Row(
               children: <Widget>[

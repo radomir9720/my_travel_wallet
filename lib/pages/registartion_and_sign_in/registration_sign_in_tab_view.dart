@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/main.dart';
-import 'package:my_travel_wallet/pages/registartion_and_sign_in/sign_in.dart';
+import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_page.dart';
+import 'package:my_travel_wallet/pages/registartion_and_sign_in/sign_in_page.dart';
 
 class SignInPage extends StatefulWidget {
   static String id = 'signInPage';
@@ -12,9 +13,25 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  List<Widget> tabs;
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    tabs = [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Войти",
+          style: prefs.getMainTextStyle().copyWith(fontSize: 15.0),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text("Регистрация",
+            style: prefs.getMainTextStyle().copyWith(fontSize: 15.0)),
+      )
+    ];
+
+    _tabController = TabController(length: tabs.length, vsync: this);
     super.initState();
   }
 
@@ -45,33 +62,14 @@ class _SignInPageState extends State<SignInPage>
         bottom: TabBar(
           indicatorColor: prefs.getThemeAccentColor(),
           controller: _tabController,
-          tabs: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Войти",
-                style: prefs
-                    .getMainTextStyle()
-                    .copyWith(fontSize: 15.0),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("Регистрация",
-                  style: prefs
-                      .getMainTextStyle()
-                      .copyWith(fontSize: 15.0)),
-            )
-          ],
+          tabs: tabs,
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
           SignIn(),
-          Container(
-            color: Colors.teal,
-          ),
+          RegistrationPage(),
         ],
       ),
     );
