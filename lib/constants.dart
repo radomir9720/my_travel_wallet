@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/pages/currency_page.dart';
 
 // ===================== CustomBottomNavigationBarButton =====================
 const double kCustomBottomNavigationBarButtonHeight = 50.0;
@@ -44,3 +45,7 @@ const kInputDecoration = InputDecoration(
     borderSide: BorderSide(color: kDarkThemeAccentColor, width: 2.0),
   ),
 );
+
+// ===================== CurrencyPage ===================== \\
+
+const String kBaseCurrencyKey = "baseCurrency";
