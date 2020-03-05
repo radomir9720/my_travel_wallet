@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/tabs/bottom_navigation_bar_button.dart';
 import 'package:my_travel_wallet/constants.dart';
-import 'package:my_travel_wallet/main.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   CustomBottomNavigationBar({@required this.items});

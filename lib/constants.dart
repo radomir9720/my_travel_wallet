@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_wallet/pages/currency_page.dart';
 
 // ===================== CustomBottomNavigationBarButton =====================
 const double kCustomBottomNavigationBarButtonHeight = 50.0;
@@ -20,7 +19,7 @@ const Color kLightThemeAccentColor = Colors.indigo;
 const TextStyle kLightThemeMainTextStyle = TextStyle(color: kLightThemeThirdColor);
 
 // Dark Theme
-const String kDarkThemeKey = 'darkMode';
+
 const Color kDarkThemeMainColor = Color(0xFF1d1333);
 const Color kDarkThemeSecondaryColor = Color(0xFF111328);
 const Color kDarkThemeThirdColor = Color(0xFF8D8E98);
@@ -33,11 +32,11 @@ const TextStyle kDarkThemeMainTextStyle = TextStyle(color: kDarkThemeThirdColor)
 const double kStartIndentDividerValue = 10.0;
 const double kEndIndentDividerValue = 10.0;
 
-// ===================== Registration / Sign In===================== \\
+// ===================== TextInputDecoration ===================== \\
 const kInputDecoration = InputDecoration(
   hintText: 'Введите текст',
   contentPadding:
-  EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+  EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(color: kDarkThemeAccentColor, width: 1.0),
   ),
@@ -46,6 +45,10 @@ const kInputDecoration = InputDecoration(
   ),
 );
 
-// ===================== CurrencyPage ===================== \\
+
+// ===================== Keys ===================== \\
 
 const String kBaseCurrencyKey = "baseCurrency";
+const String kDarkThemeKey = 'darkMode';
+const String kScreenWidthKey = 'screenWidth';
+const String kScreenHeightKey = 'screenHeight';

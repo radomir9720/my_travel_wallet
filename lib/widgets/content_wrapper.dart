@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../main.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
 
 class CustomPageContentWrapper extends StatelessWidget {
   CustomPageContentWrapper({this.child});

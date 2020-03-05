@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_wallet/main.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/widgets/content_wrapper.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';

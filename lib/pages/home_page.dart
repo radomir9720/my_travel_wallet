@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_wallet/main.dart';
-import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_tab_view.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_tab_view.dart';
 import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
-import 'package:my_travel_wallet/utilities/shared_preferences.dart';
-import 'package:hive/hive.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
 
 void main() => runApp(MyTravelWallet());
-MySharedPreferences prefs = MySharedPreferences();
 
 class MyTravelWallet extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-      future: prefs.init(),
+      future: initializeData(),
       builder: (context, snap) {
         if (snap.connectionState == ConnectionState.done) {
           return MaterialApp(

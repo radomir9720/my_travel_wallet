@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/widgets/settings_card.dart';
-import 'package:my_travel_wallet/main.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
+
+
 class SettingsPage extends StatefulWidget {
   SettingsPage({this.key});
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_wallet/main.dart';
+import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_page.dart';
 import 'package:my_travel_wallet/pages/registartion_and_sign_in/sign_in_page.dart';
 
