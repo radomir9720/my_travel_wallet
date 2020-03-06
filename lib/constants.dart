@@ -52,3 +52,4 @@ const String kBaseCurrencyKey = "baseCurrency";
 const String kDarkThemeKey = 'darkMode';
 const String kScreenWidthKey = 'screenWidth';
 const String kScreenHeightKey = 'screenHeight';
+const String kIsAuthorizedStatusKey = 'isAuthorized';

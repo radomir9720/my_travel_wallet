@@ -13,6 +13,8 @@ class MySharedPreferences extends ChangeNotifier {
     _switchThemeValue = await _prefs.getBool(kDarkThemeKey) ?? false;
     // По умолчанию базовой валютой будет USD
     _baseCurrency = await _prefs.getString(kBaseCurrencyKey) ?? "USD";
+    // Если данных нет по авторизации -> пользователь не авторизован.
+    _isAuthorized = await _prefs.getBool(kIsAuthorizedStatusKey) ?? false;
     // TODO Хотелось в идеале в SharedPreferences писать размеры экрана, однако, метод, описанный ниже(Хотел прокинуть context из main.dart через main_data.dart сюда, а дальше у этого контекста взять ширину и высоту), не работает. Поискать другие варианты.
 //    _screenWidth = await _prefs.getDouble(kScreenWidthKey) ?? MediaQuery.of(context).size.width;
 //        _screenHeight = await _prefs.getDouble(kScreenHeightKey) ?? MediaQuery.of(context).size.height;
@@ -63,8 +65,18 @@ class MySharedPreferences extends ChangeNotifier {
   double _screenWidth;
   double _screenHeight;
 
-  void getScreenWidth() => _screenWidth;
-  void getScreenHeight() => _screenHeight;
+  double getScreenWidth() => _screenWidth;
+  double getScreenHeight() => _screenHeight;
+
+  // ====================== Google auth ====================== \\
+
+  bool _isAuthorized;
+
+  bool getAuthorizedStatus() => _isAuthorized;
+  void setAuthorizedStatus(bool value) async {
+    _isAuthorized = value;
+    _prefs.setBool(kIsAuthorizedStatusKey, value);
+  }
 
   // ====================== Dispose ====================== \\
 

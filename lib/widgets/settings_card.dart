@@ -4,11 +4,11 @@ import 'package:my_travel_wallet/data/main_data.dart';
 
 class SettingsCard extends StatefulWidget {
   SettingsCard(
-      {@required this.title, this.subTitle, this.value, this.function});
+      {@required this.title, this.subTitle, this.switchValue, this.function});
 
   final String title;
   final String subTitle;
-  final bool value;
+  final bool switchValue;
   final Function function;
 
   @override
@@ -20,7 +20,7 @@ class _SettingsCardState extends State<SettingsCard> {
   @override
   void initState() {
     super.initState();
-    _switchValue = widget.value;
+    _switchValue = widget.switchValue;
   }
 
   @override
@@ -38,7 +38,7 @@ class _SettingsCardState extends State<SettingsCard> {
                   widget.subTitle,
                   style: prefs.getMainTextStyle(),
                 ),
-          trailing: widget.value == null
+          trailing: widget.switchValue == null
               ? SizedBox()
               : Switch(
                   activeColor: prefs.getThemeAccentColor(),

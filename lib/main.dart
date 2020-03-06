@@ -5,34 +5,49 @@ import 'package:my_travel_wallet/data/main_data.dart';
 
 void main() => runApp(MyTravelWallet());
 
-class MyTravelWallet extends StatelessWidget {
-  // This widget is the root of your application.
+class MyTravelWallet extends StatefulWidget {
+  @override
+  _MyTravelWalletState createState() => _MyTravelWalletState();
+}
+
+class _MyTravelWalletState extends State<MyTravelWallet> {
+
+  Widget body = Container(
+    height: 100.0,
+    child: Center(
+      child: CircularProgressIndicator(
+        backgroundColor: Colors.white,
+//        valueColor: Colors.black,
+      ),
+    ),
+  );
+
+  void waitInitializeDataAndRunApp() async {
+    await initializeData();
+    setState(() {
+      body = MainTabView();
+    });
+  }
+
+  @override
+  void initState() {
+    waitInitializeDataAndRunApp();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: initializeData(),
-      builder: (context, snap) {
-        if (snap.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            routes: {
-              SignInPage.id: (context) => SignInPage(),
-            },
-            title: 'Приложение для учета финансов в путешествиях.',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home: MainTabView(),
-          );
-        } else {
-          return Container(
-              height: 100.0,
-              child: Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Colors.white,
-              )));
-        }
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        SignInPage.id: (context) => SignInPage(),
       },
+      title: 'Приложение для учета финансов в путешествиях.',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: body,
     );
   }
 }

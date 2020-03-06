@@ -1,4 +1,5 @@
 import 'package:my_travel_wallet/utilities/currencies.dart';
+import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
 
 MySharedPreferences prefs = MySharedPreferences();
@@ -7,13 +8,15 @@ BaseCurrencyCardData baseCurrencyCardData = BaseCurrencyCardData();
 List<String> currencyListInit = [];
 Map<String, String> currencyNameAndCode = {};
 
-Future<bool> initializeData() async {
-  await prefs.init();
-  baseCurrencyCardData.init();
-  currencies.values.forEach((e) => currencyListInit.add(e["cur_name"]));
-  currencies.values.forEach(
-      (value) => currencyNameAndCode[value["cur_name"]] = value["cur_code"]);
-  return true;
+
+void initializeData() async {
+    await prefs.init();
+    if (prefs.getAuthorizedStatus()) await signInWithGoogle();
+    baseCurrencyCardData.init();
+    currencies.values.forEach((e) => currencyListInit.add(e["cur_name"]));
+    currencies.values.forEach(
+            (value) =>
+        currencyNameAndCode[value["cur_name"]] = value["cur_code"]);
 }
 
 class BaseCurrencyCardData {

@@ -65,21 +65,23 @@ class _CurrencyPageState extends State<CurrencyPage> {
                       context: context,
                       child: CurrencySearchView(),
                     ).then((valueFromDialog) {
-                      baseCurrencyCardData.updateValues(
-                        imageName:
-                            currencies[currencyNameAndCode[valueFromDialog]]
-                                ["img_name"],
-                        currencyCode:
-                            currencies[currencyNameAndCode[valueFromDialog]]
-                                ["cur_code"],
-                        currencyName:
-                            currencies[currencyNameAndCode[valueFromDialog]]
-                                ["cur_name"],
-                        currencySymbol:
-                            currencies[currencyNameAndCode[valueFromDialog]]
-                                ["cur_symbol"],
-                      );
-                      setState(() {});
+                      if (valueFromDialog != null) {
+                        baseCurrencyCardData.updateValues(
+                          imageName:
+                              currencies[currencyNameAndCode[valueFromDialog]]
+                                  ["img_name"],
+                          currencyCode:
+                              currencies[currencyNameAndCode[valueFromDialog]]
+                                  ["cur_code"],
+                          currencyName:
+                              currencies[currencyNameAndCode[valueFromDialog]]
+                                  ["cur_name"],
+                          currencySymbol:
+                              currencies[currencyNameAndCode[valueFromDialog]]
+                                  ["cur_symbol"],
+                        );
+                        setState(() {});
+                      }
                     });
                   },
                 ),

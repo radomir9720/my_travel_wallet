@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/utilities/google_auth.dart';
+import 'package:my_travel_wallet/widgets/dialog_window.dart';
 import 'package:my_travel_wallet/widgets/settings_card.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
-
+import 'package:my_travel_wallet/widgets/submit_button.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({this.key});
@@ -46,11 +48,48 @@ class _SettingsPageState extends State<SettingsPage> {
         children: <Widget>[
           SettingsCard(
             title: "Темная тема",
-            value: _themeSwitchValue,
+            switchValue: _themeSwitchValue,
             function: () {
               _themeSwitchValue = !_themeSwitchValue;
               prefs.setSwitchThemeValue(_themeSwitchValue);
             },
+          ),
+          MaterialButton(
+            padding: EdgeInsets.all(0.0),
+            onPressed: () {
+              showDialog(
+                context: context,
+                // Проверка залогинен ли пользователь
+                child: googleSignIn.currentUser == null
+                    // Если не залогинен, выводим диалоговое окно с данной информацией
+                    ? DialogWindow(
+                        mainText: "Вы не авторизованы",
+                        fractionRatio: 0.2,
+                        neutralButtonText: "Понятно",
+                        neutralButtonFunction: () => Navigator.pop(context),
+                      )
+                    // Если залогинен, показываем диалоговое окно с выбором
+                    : DialogWindow(
+                        mainText: "Вы точно хотите выйти?",
+                        fractionRatio: 0.3,
+                        detailText:
+                            "Авторизация нужна для синхронизации данных. При входе в данное приложение на другом устройстве данные синхронизируются.",
+                        positiveButtonFunction: () {
+                          signOutGoogle();
+                          prefs.setAuthorizedStatus(false);
+                          Navigator.pop(context);
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text("Вы вышли из аккаунта")));
+                        },
+                        positiveButtonText: "Да",
+                        negativeButtonFunction: () => Navigator.pop(context),
+                        negativeButtonText: "Нет",
+                      ),
+              );
+            },
+            child: SettingsCard(
+              title: "Выйти из аккаунта Google",
+            ),
           ),
           SettingsCard(
             title: "Версия приложения",

@@ -23,22 +23,12 @@ class CurrencyCard extends StatefulWidget {
 }
 
 class _CurrencyCardState extends State<CurrencyCard> {
-//  double screenWidth;
-
-  @override
-  void initState() {
-    // TODO: убрать этот костыль. Вынести ширину и высоту экрана в другое место. По хорошему - сохранить в кэше где-то, либо в БД.
-    super.initState();
-//    screenWidth = MediaQuery.of(context).size.width * 0.4;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
         Container(
-//        height: 100.0,
           padding: EdgeInsets.all(5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +43,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
                 style: prefs.getMainTextStyle(),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.4,
+                width: MediaQuery.of(context).size.width *0.4,
                 child: Text(
                   widget.currencyName,
                   style: prefs.getMainTextStyle(),
@@ -78,9 +68,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
                       child: Text(
                         widget.currencyValue,
                         style: TextStyle(
-                          fontSize: 20.0,
-                          color: prefs.getMainThemeColor()
-                        ),
+                            fontSize: 20.0, color: prefs.getMainThemeColor()),
                       )),
             ],
           ),
