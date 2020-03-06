@@ -36,7 +36,7 @@ const double kEndIndentDividerValue = 10.0;
 const kInputDecoration = InputDecoration(
   hintText: 'Введите текст',
   contentPadding:
-  EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+  EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(color: kDarkThemeAccentColor, width: 1.0),
   ),

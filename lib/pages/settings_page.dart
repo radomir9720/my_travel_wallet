@@ -47,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage> {
           SettingsCard(
             title: "Темная тема",
             value: _themeSwitchValue,
-            function: () async {
+            function: () {
               _themeSwitchValue = !_themeSwitchValue;
               prefs.setSwitchThemeValue(_themeSwitchValue);
             },
