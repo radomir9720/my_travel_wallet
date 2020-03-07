@@ -7,7 +7,7 @@ class MySharedPreferences extends ChangeNotifier {
 
   SharedPreferences _prefs;
 
-  Future<bool> init() async {
+  void init() async {
     _prefs = await SharedPreferences.getInstance();
     // По умолчанию тема будет светлой
     _switchThemeValue = await _prefs.getBool(kDarkThemeKey) ?? false;
@@ -18,7 +18,7 @@ class MySharedPreferences extends ChangeNotifier {
     // TODO Хотелось в идеале в SharedPreferences писать размеры экрана, однако, метод, описанный ниже(Хотел прокинуть context из main.dart через main_data.dart сюда, а дальше у этого контекста взять ширину и высоту), не работает. Поискать другие варианты.
 //    _screenWidth = await _prefs.getDouble(kScreenWidthKey) ?? MediaQuery.of(context).size.width;
 //        _screenHeight = await _prefs.getDouble(kScreenHeightKey) ?? MediaQuery.of(context).size.height;
-    return _switchThemeValue != null;
+
   }
 
   // ====================== Theme Mode(Light/Dark) ====================== \\

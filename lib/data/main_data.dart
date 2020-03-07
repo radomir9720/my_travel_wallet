@@ -1,6 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
+import 'package:my_travel_wallet/data/hive.dart';
+import 'package:hive/hive.dart';
+
+import '../constants.dart';
+
+// ============================== Shared Preferences ============================== \\
 
 MySharedPreferences prefs = MySharedPreferences();
 BaseCurrencyCardData baseCurrencyCardData = BaseCurrencyCardData();
@@ -8,15 +17,14 @@ BaseCurrencyCardData baseCurrencyCardData = BaseCurrencyCardData();
 List<String> currencyListInit = [];
 Map<String, String> currencyNameAndCode = {};
 
-
 void initializeData() async {
-    await prefs.init();
-    if (prefs.getAuthorizedStatus()) await signInWithGoogle();
-    baseCurrencyCardData.init();
-    currencies.values.forEach((e) => currencyListInit.add(e["cur_name"]));
-    currencies.values.forEach(
-            (value) =>
-        currencyNameAndCode[value["cur_name"]] = value["cur_code"]);
+  await prefs.init();
+  initCurrencyPageData();
+  if (prefs.getAuthorizedStatus()) await signInWithGoogle();
+  baseCurrencyCardData.init();
+  currencies.values.forEach((e) => currencyListInit.add(e["cur_name"]));
+  currencies.values.forEach(
+      (value) => currencyNameAndCode[value["cur_name"]] = value["cur_code"]);
 }
 
 class BaseCurrencyCardData {
@@ -47,4 +55,16 @@ class BaseCurrencyCardData {
     _currencyName = currencyName;
     _imageName = imageName;
   }
+}
+
+// ============================== HIVE ============================== \\
+
+void initCurrencyPageData() async {
+  Box currencyPageDataBox;
+  String path = Directory.systemTemp.path;
+  Hive
+    ..init(path)
+    ..registerAdapter(CurrencyDataModelAdapter());
+  await Hive.openBox(kCurrencyPageDataKey);
+  currencyPageDataBox = await Hive.box(kCurrencyPageDataKey);
 }

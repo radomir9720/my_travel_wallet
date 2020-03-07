@@ -4,6 +4,7 @@ import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/widgets/currency_card.dart';
 import 'package:my_travel_wallet/widgets/currency_search_view.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
+import 'package:hive/hive.dart';
 
 class CurrencyPage extends StatefulWidget {
   CurrencyPage({this.key});
@@ -32,6 +33,8 @@ class _CurrencyPageState extends State<CurrencyPage> {
       currencyValue: "1.054",
     ),
   ];
+
+
   @override
   void initState() {
     super.initState();

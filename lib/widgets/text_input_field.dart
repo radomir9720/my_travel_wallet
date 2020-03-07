@@ -20,6 +20,7 @@ class TextInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+        keyboardType: TextInputType.numberWithOptions(),
         controller: controller,
         autofocus: autoFocus,
         textAlign: TextAlign.center,
