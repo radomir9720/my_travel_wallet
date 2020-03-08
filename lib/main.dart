@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_tab_view.dart';
 import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
@@ -33,6 +34,12 @@ class _MyTravelWalletState extends State<MyTravelWallet> {
   void initState() {
     waitInitializeDataAndRunApp();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
   }
 
   @override

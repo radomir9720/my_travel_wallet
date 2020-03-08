@@ -8,19 +8,21 @@ class TextInputField extends StatelessWidget {
     this.obscure = false,
     this.autoFocus = false,
     this.controller,
+    this.keyboardType = TextInputType.text,
   });
 
   final String hintText;
   final bool obscure;
   final bool autoFocus;
   final TextEditingController controller;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
-        keyboardType: TextInputType.numberWithOptions(),
+        keyboardType: keyboardType,
         controller: controller,
         autofocus: autoFocus,
         textAlign: TextAlign.center,

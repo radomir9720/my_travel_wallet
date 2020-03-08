@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/widgets/currency_card.dart';
 import 'package:my_travel_wallet/widgets/currency_search_view.dart';
+import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
-import 'package:hive/hive.dart';
 
 class CurrencyPage extends StatefulWidget {
   CurrencyPage({this.key});
@@ -15,30 +17,7 @@ class CurrencyPage extends StatefulWidget {
 }
 
 class _CurrencyPageState extends State<CurrencyPage> {
-  List<CurrencyCard> listItems = [
-    CurrencyCard(
-      onPressed: () {},
-      imgName: currencies["TZS"]["img_name"],
-      currencyCode: currencies["TZS"]["cur_code"],
-      currencyName: currencies["TZS"]["cur_name"],
-      currencySymbol: currencies["TZS"]["cur_symbol"],
-      currencyValue: "1.054",
-    ),
-    CurrencyCard(
-      onPressed: () {},
-      imgName: currencies["AZN"]["img_name"],
-      currencyCode: currencies["AZN"]["cur_code"],
-      currencyName: currencies["AZN"]["cur_name"],
-      currencySymbol: currencies["AZN"]["cur_symbol"],
-      currencyValue: "1.054",
-    ),
-  ];
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  List<CurrencyCard> listItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +68,9 @@ class _CurrencyPageState extends State<CurrencyPage> {
                   },
                 ),
                 TextInputField(
+                  keyboardType: TextInputType.numberWithOptions(),
                   hintText: "Введите сумму",
                 ),
-//                Text(
-//                  "Выберите валюту и введите сумму",
-//                  style: prefs.getMainTextStyle(),
-//                ),
               ],
             ),
           ),
@@ -103,45 +79,93 @@ class _CurrencyPageState extends State<CurrencyPage> {
             height: 0.0,
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: listItems.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  background: stackBehindDismiss(),
-                  key: ObjectKey(listItems[index]),
-                  child: Container(
+              child: ValueListenableBuilder(
+            valueListenable: currencyPageDataBox.listenable(),
+            builder: (context, currencyPageDataBox, widget) {
+              return ListView.builder(
+                itemCount: currencyPageDataBox.length,
+                itemBuilder: (context, index) {
+                  List<dynamic> keys = currencyPageDataBox.keys.toList();
+                  return Dismissible(
+                    background: stackBehindDismiss(),
+                    key: ObjectKey(currencyPageDataBox.get(keys[index])),
+                    child: Container(
 //                    padding: EdgeInsets.all(20.0),
-                    child: listItems[index],
-                  ),
-                  onDismissed: (direction) {
-                    var item = listItems.elementAt(index);
-                    //To delete
-                    deleteItem(index);
-                    //To show a snackbar with the UNDO button
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("Валюта удалена"),
-                        action: SnackBarAction(
+                      child: CurrencyCard(
+                        imgName: currencies[currencyPageDataBox
+                                .get(keys[index])[kCurrencyPageDataKey]
+                            ["currencyCode"]]["img_name"],
+                        currencyName: currencies[currencyPageDataBox
+                                .get(keys[index])[kCurrencyPageDataKey]
+                            ["currencyCode"]]["cur_name"],
+                        currencyCode: currencies[currencyPageDataBox
+                                .get(keys[index])[kCurrencyPageDataKey]
+                            ["currencyCode"]]["cur_code"],
+                        currencySymbol: currencies[currencyPageDataBox
+                                .get(keys[index])[kCurrencyPageDataKey]
+                            ["currencyCode"]]["cur_symbol"],
+                        currencyValue: "1.00",
+                        onPressed: () {},
+                      ),
+//                        currencyPageDataBox.get(index),
+                    ),
+                    onDismissed: (direction) {
+                      var item = {
+                        kCurrencyPageDataKey: {
+                          "addTime": DateTime.now(),
+                          "currencyCode": currencies[currencyPageDataBox
+                                  .get(keys[index])[kCurrencyPageDataKey]
+                              ["currencyCode"]]["cur_code"],
+                          "currencyValue": ""
+                        }
+                      };
+                      //To delete
+                      deleteItem(keys[index]);
+                      //To show a snackbar with the UNDO button
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Валюта удалена"),
+                          action: SnackBarAction(
                             label: "Отменить",
                             onPressed: () {
                               //To undo deletion
-                              undoDeletion(index, item);
-                            })));
-                  },
-                );
-              },
-//    )),
-//          ListView(
-//            shrinkWrap: true,
-//            children: <Widget>[
-//              CurrencyCard(
-//                imgName: currencies["TZS"]["img_name"],
-//                currencyCode: currencies["TZS"]["cur_code"],
-//                currencyName: currencies["TZS"]["cur_name"],
-//                currencySymbol: currencies["TZS"]["cur_symbol"],
-//              ),
-//            ],
-//          ),
-            ),
+                              undoDeletion(keys[index], item);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          )),
+          SubmitButton(
+            buttonTitle: "Добавить валюту",
+            onPressed: () {
+//              print(currencyPageDataBox.toMap());
+//              print(currencyPageDataBox.get(0));
+              showDialog(
+                context: context,
+                child: CurrencySearchView(),
+              ).then(
+                (valueFromDialog) {
+                  if (valueFromDialog != null) {
+                    currencyPageDataBox.add(
+                      {
+                        kCurrencyPageDataKey: {
+                          "addTime": DateTime.now(),
+                          "currencyCode":
+                              currencies[currencyNameAndCode[valueFromDialog]]
+                                  ["cur_code"],
+                          "currencyValue": ""
+                        }
+                      },
+                    );
+                  }
+                },
+              );
+            },
           )
         ],
       ),
@@ -154,9 +178,10 @@ class _CurrencyPageState extends State<CurrencyPage> {
     the item is removed from our list of items and our list is updated, hence
     preventing the "Dismissed widget still in widget tree error" when we reload.
     */
-    setState(() {
-      listItems.removeAt(index);
-    });
+    currencyPageDataBox.delete(index);
+//    setState(() {
+//      listItems.removeAt(index);
+//    });
   }
 
   void undoDeletion(index, item) {
@@ -164,9 +189,10 @@ class _CurrencyPageState extends State<CurrencyPage> {
     This method accepts the parameters index and item and re-inserts the {item} at
     index {index}
     */
-    setState(() {
-      listItems.insert(index, item);
-    });
+    currencyPageDataBox.put(index, item);
+//    setState(() {
+//      listItems.insert(index, item);
+//    });
   }
 
   Widget stackBehindDismiss() {
