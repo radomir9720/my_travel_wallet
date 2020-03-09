@@ -60,6 +60,8 @@ class MySharedPreferences extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   // ====================== Screen size ====================== \\
 
   double _screenWidth;

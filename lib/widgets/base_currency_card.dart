@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
-class CurrencyCard extends StatefulWidget {
-  CurrencyCard({
+class BaseCurrencyCard extends StatefulWidget {
+  BaseCurrencyCard({
     this.imgName,
     this.currencyCode,
     this.currencyName,
@@ -19,10 +19,10 @@ class CurrencyCard extends StatefulWidget {
   final String currencyValue;
 
   @override
-  _CurrencyCardState createState() => _CurrencyCardState();
+  _BaseCurrencyCardState createState() => _BaseCurrencyCardState();
 }
 
-class _CurrencyCardState extends State<CurrencyCard> {
+class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,7 +51,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
                   softWrap: false,
                 ),
               ),
-              Text(widget.currencySymbol, style: prefs.getMainTextStyle()),
+              widget.currencyValue == null ? Text(widget.currencySymbol, style: prefs.getMainTextStyle()) : SizedBox(),
               widget.currencyValue == null
                   ? Icon(
                       Icons.keyboard_arrow_down,
@@ -66,7 +66,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
                         ),
                       ),
                       child: Text(
-                        widget.currencyValue,
+                        widget.currencyValue + (widget.currencySymbol == "" ? "" : " " + widget.currencySymbol),
                         style: TextStyle(
                             fontSize: 20.0, color: prefs.getMainThemeColor()),
                       )),

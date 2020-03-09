@@ -4,7 +4,7 @@ import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
 import 'package:hive/hive.dart';
-import 'package:my_travel_wallet/widgets/currency_card.dart';
+import 'package:my_travel_wallet/widgets/base_currency_card.dart';
 
 // ============================== Shared Preferences ============================== \\
 
@@ -57,7 +57,7 @@ class BaseCurrencyCardData {
 // ============================== HIVE ============================== \\
 
 Box currencyPageDataBox;
-List<CurrencyCard> listOfCurrencyCard = [];
+List<BaseCurrencyCard> listOfCurrencyCard = [];
 void initCurrencyPageData() async {
   String path = Directory.systemTemp.path;
   Hive.init(path);
@@ -66,16 +66,15 @@ void initCurrencyPageData() async {
   currencyPageDataBox = await Hive.box(kCurrencyPageDataKey);
 
   currencyPageDataBox.keys.forEach((e) {
-    listOfCurrencyCard.add(CurrencyCard(
-      imgName: currencies[currencyPageDataBox
-          .get(e)[kCurrencyPageDataKey]["currencyCode"]]["img_name"],
-      currencyName: currencies[currencyPageDataBox
-          .get(e)[kCurrencyPageDataKey]["currencyCode"]]["cur_name"],
-      currencyCode: currencies[currencyPageDataBox
-          .get(e)[kCurrencyPageDataKey]["currencyCode"]]["cur_code"],
-      currencySymbol: currencies[
-          currencyPageDataBox.get(e)[kCurrencyPageDataKey]
-              ["currencyCode"]]["cur_symbol"],
+    listOfCurrencyCard.add(BaseCurrencyCard(
+      imgName: currencies[currencyPageDataBox.get(e)["currencyCode"]]
+          ["img_name"],
+      currencyName: currencies[currencyPageDataBox.get(e)["currencyCode"]]
+          ["cur_name"],
+      currencyCode: currencies[currencyPageDataBox.get(e)["currencyCode"]]
+          ["cur_code"],
+      currencySymbol: currencies[currencyPageDataBox.get(e)["currencyCode"]]
+          ["cur_symbol"],
       currencyValue: "1.00",
       onPressed: () {},
     ));

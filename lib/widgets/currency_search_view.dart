@@ -4,13 +4,17 @@ import 'package:my_travel_wallet/widgets/currency_search_card.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
 
 class CurrencySearchView extends StatefulWidget {
+  CurrencySearchView({this.additionalFilter});
+
+  final List<String> additionalFilter;
+
   @override
   _CurrencySearchViewState createState() => _CurrencySearchViewState();
 }
 
 class _CurrencySearchViewState extends State<CurrencySearchView> {
-
   List<String> currencyListFilter = [];
+  List<String> firstListFilter = [];
   TextEditingController _textEditingController = TextEditingController();
   Widget content = Center(
     child: CircularProgressIndicator(),
@@ -18,10 +22,15 @@ class _CurrencySearchViewState extends State<CurrencySearchView> {
   @override
   void initState() {
     super.initState();
-    currencyListFilter = currencyListInit;
+    firstListFilter = widget.additionalFilter != null
+        ? currencyListInit
+            .where(
+                (e) => widget.additionalFilter.contains(currencyNameAndCode[e]))
+            .toList()
+        : currencyListInit;
     _textEditingController.addListener(() {
       setState(() {
-        currencyListFilter = currencyListInit
+        currencyListFilter = firstListFilter
             .where(
               (e) => e
                   .toLowerCase()
