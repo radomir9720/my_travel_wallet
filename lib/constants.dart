@@ -54,3 +54,24 @@ const String kScreenWidthKey = 'screenWidth';
 const String kScreenHeightKey = 'screenHeight';
 const String kIsAuthorizedStatusKey = 'isAuthorized';
 const String kCurrencyPageDataKey = 'currencyPageData';
+const String kCurrencyPageToConvertCardKey = 'toConvert';
+//const String kHiveBoxDataKey = 'hiveBoxData';
+//const String kHiveBoxDataBaseCurrencyKey = 'baseCurrency';
+const String kCurrencyPageValueKey = 'currencyValue';
+
+// ===================== DateTime ===================== \\
+
+const Map<int, String> months = {
+  1: "января",
+  2: "февраля",
+  3: "марта",
+  4: "апреля",
+  5: "мая",
+  6: "июня",
+  7: "июля",
+  8: "августа",
+  9: "сентября",
+  10: "октября",
+  11: "ноября",
+  12: "декабря",
+};

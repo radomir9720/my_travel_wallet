@@ -16,9 +16,7 @@ class _CurrencySearchViewState extends State<CurrencySearchView> {
   List<String> currencyListFilter = [];
   List<String> firstListFilter = [];
   TextEditingController _textEditingController = TextEditingController();
-  Widget content = Center(
-    child: CircularProgressIndicator(),
-  );
+
   @override
   void initState() {
     super.initState();

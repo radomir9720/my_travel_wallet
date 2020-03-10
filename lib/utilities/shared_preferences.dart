@@ -11,14 +11,11 @@ class MySharedPreferences extends ChangeNotifier {
     _prefs = await SharedPreferences.getInstance();
     // По умолчанию тема будет светлой
     _switchThemeValue = await _prefs.getBool(kDarkThemeKey) ?? false;
-    // По умолчанию базовой валютой будет USD
-    _baseCurrency = await _prefs.getString(kBaseCurrencyKey) ?? "USD";
     // Если данных нет по авторизации -> пользователь не авторизован.
     _isAuthorized = await _prefs.getBool(kIsAuthorizedStatusKey) ?? false;
     // TODO Хотелось в идеале в SharedPreferences писать размеры экрана, однако, метод, описанный ниже(Хотел прокинуть context из main.dart через main_data.dart сюда, а дальше у этого контекста взять ширину и высоту), не работает. Поискать другие варианты.
 //    _screenWidth = await _prefs.getDouble(kScreenWidthKey) ?? MediaQuery.of(context).size.width;
 //        _screenHeight = await _prefs.getDouble(kScreenHeightKey) ?? MediaQuery.of(context).size.height;
-
   }
 
   // ====================== Theme Mode(Light/Dark) ====================== \\
@@ -48,19 +45,6 @@ class MySharedPreferences extends ChangeNotifier {
 
   TextStyle getMainTextStyle() =>
       _switchThemeValue ? kDarkThemeMainTextStyle : kLightThemeMainTextStyle;
-
-  // ====================== Currency ====================== \\
-
-  String _baseCurrency;
-
-  String getBaseCurrency() => _baseCurrency;
-
-  void setBaseCurrency(String value) {
-    _baseCurrency = value;
-    notifyListeners();
-  }
-
-
 
   // ====================== Screen size ====================== \\
 

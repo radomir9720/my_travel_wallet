@@ -13,12 +13,7 @@ class MainTabView extends StatefulWidget {
 }
 
 List<Widget> pages;
-void updatePageStorage(PageStorageKey key, context) {
-  pages[key.value] =
-      PageStorage.of(context).readState(context, identifier: ValueKey(key));
-}
 
-//MySharedPreferences mySharedPreferences = MySharedPreferences();
 
 class _MainTabViewState extends State<MainTabView>
     with SingleTickerProviderStateMixin {
@@ -26,6 +21,12 @@ class _MainTabViewState extends State<MainTabView>
   Widget _homePage;
   Widget _currencyPage;
   Widget _settingsPage;
+
+  void updatePageStorage(PageStorageKey key, context) {
+    pages[key.value] =
+//      PageStorage.of(context).readState(context, identifier: ValueKey(key));
+    widget.bucket.readState(context, identifier: ValueKey(key));
+  }
 
   @override
   void initState() {
@@ -95,14 +96,12 @@ class _MainTabViewState extends State<MainTabView>
               color: _tabController.index == 1
                   ? prefs.getThemeAccentColor()
                   : prefs.getThirdThemeColor(),
-//              isActive: _tabController.index == 1,
               icon: Icons.attach_money,
               function: () => _tabController.index = 1),
           CustomBottomNavigationBarButton(
               color: _tabController.index == 2
                   ? prefs.getThemeAccentColor()
                   : prefs.getThirdThemeColor(),
-//              isActive: _tabController.index == 2,
               icon: Icons.settings,
               function: () => _tabController.index = 2),
         ],
