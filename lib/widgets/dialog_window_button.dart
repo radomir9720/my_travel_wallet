@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
 class DialogWindowButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class DialogWindowButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4.0),
+          borderRadius: BorderRadius.circular(kBorderRadiusDouble),
           side: BorderSide(color: prefs.getThemeAccentColor())),
       onPressed: () => function(),
       child: Text(

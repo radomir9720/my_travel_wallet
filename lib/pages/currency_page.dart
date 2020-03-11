@@ -22,7 +22,6 @@ class CurrencyPage extends StatefulWidget {
 class _CurrencyPageState extends State<CurrencyPage> {
   List<BaseCurrencyCard> listItems = [];
   TextEditingController _controller = TextEditingController();
-  RegExp enterSumTextFieldRegExp = RegExp(r"[[0-9]\.]");
 
   @override
   void initState() {
@@ -35,6 +34,20 @@ class _CurrencyPageState extends State<CurrencyPage> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  String getCurrencyValue(index) {
+    String value;
+    try {
+      value = currencyPageDataBox.get(kCurrencyPageValueKey)[
+          currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"] +
+              currencies[
+                  currencyPageDataBox.get(kCurrencyPageToConvertCardKey)[index]
+                      ["currencyCode"]]["cur_code"]]["value"];
+    } catch (e) {
+      value = "";
+    }
+    return value;
   }
 
   @override
@@ -112,6 +125,16 @@ class _CurrencyPageState extends State<CurrencyPage> {
                 TextInputField(
                   keyboardType: TextInputType.numberWithOptions(),
                   controller: _controller,
+//                  isValid: ((double.tryParse(_controller.text) != null &&
+//                          double.tryParse(_controller.text) > 0) ||
+//                      _controller.text == ""),
+                  checkIfIsValid: (controller) {
+                    return ((double.tryParse(controller.text) != null &&
+                            double.tryParse(controller.text) > 0) ||
+                        controller.text == "");
+                  },
+                  errorText:
+                      "Поле заполнено неправильно. Введите положительное число (может содержать точку)",
                   hintText: "Введите сумму",
                   onChanged: (String text) {
                     currencyPageDataBox
@@ -120,30 +143,15 @@ class _CurrencyPageState extends State<CurrencyPage> {
                 ),
                 Text(
                   "обновлено: " +
-                      currencyPageDataBox
-                          .get(kCurrenciesUpdateTimeKey)["updatedAt"],
+                      (currencyPageDataBox.get(kCurrenciesUpdateTimeKey) == null
+                          ? ""
+                          : currencyPageDataBox
+                              .get(kCurrenciesUpdateTimeKey)["updatedAt"]),
                   style: TextStyle(fontSize: 12.0, color: Colors.grey),
                 ),
                 SizedBox(
                   height: 4.0,
                 ),
-//                SubmitButton(
-//                  buttonTitle: "Конвертировать",
-//                  onPressed: () {
-//                    List<String> toCurrency = [];
-//                    currencyPageDataBox
-//                        .get(kCurrencyPageToConvertCardKey)
-//                        .values
-//                        .forEach((e) {
-//                      toCurrency.add(e["currencyCode"]);
-//                    });
-////                    print(toCurrency);
-//                    ApiData().updateApiData(
-//                        currencyPageDataBox
-//                            .get(kBaseCurrencyKey)["currencyCode"],
-//                        toCurrency);
-//                  },
-//                )
               ],
             ),
           ),
@@ -182,8 +190,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
                           currencyCode: currencyCode,
                           currencySymbol: currencySymbol,
                           imgName: imageName,
-                          currencyValue:
-                              getCurrencyValue(keys[index]),
+                          currencyValue: getCurrencyValue(keys[index]),
                           baseCurrencyCode: currencyPageDataBox
                               .get(kBaseCurrencyKey)["currencyCode"],
                           enteredSum: currencyPageDataBox
@@ -265,20 +272,6 @@ class _CurrencyPageState extends State<CurrencyPage> {
         ],
       ),
     );
-  }
-
-  String getCurrencyValue(index) {
-    String value;
-    try {
-      value = currencyPageDataBox.get(kCurrencyPageValueKey)[
-          currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"] +
-              currencies[
-                  currencyPageDataBox.get(kCurrencyPageToConvertCardKey)[index]
-                      ["currencyCode"]]["cur_code"]]["value"];
-    } catch (e) {
-      value = "";
-    }
-    return value;
   }
 
   double getParsedSum(String sum) {

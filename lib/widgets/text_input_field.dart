@@ -11,6 +11,8 @@ class TextInputField extends StatefulWidget {
     this.controller,
     this.keyboardType = TextInputType.text,
     this.onChanged,
+    this.errorText,
+    this.checkIfIsValid,
   });
 
   final String hintText;
@@ -19,6 +21,8 @@ class TextInputField extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final Function onChanged;
+  final String errorText;
+  final Function checkIfIsValid;
 
   @override
   _TextInputFieldState createState() => _TextInputFieldState();
@@ -29,21 +33,21 @@ class _TextInputFieldState extends State<TextInputField> {
 
   @override
   void initState() {
-    widget.controller.addListener(() {
-      _isValid = ((double.tryParse(widget.controller.text) != null &&
-              double.tryParse(widget.controller.text) > 0) || widget.controller.text == "")
-          ? true
-          : false;
-      setState(() {});
-    });
+    if (widget.controller != null && widget.errorText != null) {
+      widget.controller.addListener(() {
+        _isValid = widget.checkIfIsValid(widget.controller) ? true : false;
+        setState(() {});
+      });
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: kPadding,
       child: TextField(
+        key: widget.key,
         keyboardType: widget.keyboardType,
         onChanged: (text) => widget.onChanged(text),
         controller: widget.controller,
@@ -53,11 +57,13 @@ class _TextInputFieldState extends State<TextInputField> {
         style: TextStyle(color: prefs.getThemeAccentColor()),
         cursorColor: prefs.getThemeAccentColor(),
         decoration: InputDecoration(
-          helperText: _isValid ? null : "Поле заполнено неправильно. Введите число (может содержать точку)",
+          helperText: _isValid ? null : widget.errorText,
           helperMaxLines: 2,
-          helperStyle: TextStyle(color: Colors.red,),
+          helperStyle: TextStyle(
+            color: Colors.red,
+          ),
           hintText: widget.hintText,
-          contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
+          contentPadding: EdgeInsets.all(0.0),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: _isValid ? kDarkThemeAccentColor : Colors.red,
@@ -71,11 +77,6 @@ class _TextInputFieldState extends State<TextInputField> {
           hintStyle: TextStyle(
             color: prefs.getThirdThemeColor(),
           ),
-//        kInputDecoration.copyWith(
-//          hintText: widget.hintText,
-//          hintStyle: TextStyle(
-//            color: prefs.getThirdThemeColor(),
-//          ),
         ),
       ),
     );

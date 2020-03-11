@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/widgets/currency_search_card.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
@@ -57,15 +58,15 @@ class _CurrencySearchViewState extends State<CurrencySearchView> {
 //            SizedBox(height: 15.0,),
             Flexible(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: kPadding,
                 child: Container(
                   decoration: BoxDecoration(
                     color: prefs.getMainThemeColor(),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
+                      kBorderRadius,
                     ),
                   ),
-                  padding: EdgeInsets.all(8.0),
+                  padding: kPadding,
                   child: ListView.builder(
                     itemCount: currencyListFilter.length,
                     itemBuilder: (context, position) {

@@ -37,7 +37,7 @@ class ApiData {
         currencyPageDataBox.put(kCurrencyPageValueKey, tempDic);
       });
       currencyPageDataBox.put(kCurrenciesUpdateTimeKey, {"updatedAt":
-      "${dt.day} ${months[dt.month]} ${dt.hour}:${dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute}"});
+      "${dt.day} ${months[dt.month]["fullDeclination"]} ${dt.hour}:${dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute}"});
     }
   }
 

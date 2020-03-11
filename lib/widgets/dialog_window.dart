@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/widgets/dialog_window_button.dart';
 
@@ -61,16 +62,16 @@ class DialogWindow extends StatelessWidget {
         child: FractionallySizedBox(
           heightFactor: fractionRatio,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: kPadding,
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: prefs.getMainThemeColor(),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(4.0),
+                  kBorderRadius,
                 ),
               ),
-              padding: EdgeInsets.all(8.0),
+              padding: kPadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
 class BaseCurrencyCard extends StatefulWidget {
@@ -26,7 +27,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: kPadding,
       child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
         Container(
           padding: EdgeInsets.all(5.0),
@@ -66,7 +67,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
                       decoration: BoxDecoration(
                         color: prefs.getThemeAccentColor(),
                         borderRadius: BorderRadius.all(
-                          Radius.circular(4.0),
+                          kBorderRadius,
                         ),
                       ),
                       child: Text(
@@ -82,7 +83,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
           height: 51.0,
           onPressed: () => widget.onPressed(),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(kBorderRadiusDouble),
               side: BorderSide(color: prefs.getThemeAccentColor())),
         ),
       ]),

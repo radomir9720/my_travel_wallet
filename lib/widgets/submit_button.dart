@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -8,7 +9,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: kPadding,
       child: MaterialButton(
         color: prefs.getThemeAccentColor(),
         height: 50.0,

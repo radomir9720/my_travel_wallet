@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
 class ToConvertCurrencyCard extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: kPadding,
       child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
         Container(
           padding: EdgeInsets.all(5.0),
@@ -40,7 +41,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                   Row(
                     children: <Widget>[
                       SizedBox(
-                        width: 5.0,
+                        width: 3.0,
                       ),
                       Material(
                         elevation: 10.0,
@@ -77,7 +78,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                       decoration: BoxDecoration(
                         color: prefs.getThemeAccentColor(),
                         borderRadius: BorderRadius.all(
-                          Radius.circular(4.0),
+                          kBorderRadius,
                         ),
                       ),
                       child: Text(
@@ -108,7 +109,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
           height: 55.0,
           decoration: BoxDecoration(
             border: Border.all(color: prefs.getThemeAccentColor()),
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            borderRadius: BorderRadius.all(kBorderRadius),
           ),
         ),
       ]),

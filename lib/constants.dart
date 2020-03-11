@@ -45,6 +45,12 @@ const kInputDecoration = InputDecoration(
   ),
 );
 
+// ===================== Other Constants ===================== \\
+
+const double kBorderRadiusDouble = 4.0;
+const Radius kBorderRadius = Radius.circular(kBorderRadiusDouble);
+const double kPaddingDouble = 8.0;
+const EdgeInsets kPadding = EdgeInsets.all(kPaddingDouble);
 
 // ===================== Keys ===================== \\
 
@@ -60,20 +66,21 @@ const String kCurrencyPageToConvertCardKey = 'toConvert';
 const String kCurrencyPageValueKey = 'currencyValue';
 const String kCurrenciesUpdateTimeKey = 'updatedAt';
 const String kCurrencyPageEnterSumFieldKey = 'enterSum';
+const String kHomePageTravelCardKey = 'travelCard';
 
 // ===================== DateTime ===================== \\
 
-const Map<int, String> months = {
-  1: "января",
-  2: "февраля",
-  3: "марта",
-  4: "апреля",
-  5: "мая",
-  6: "июня",
-  7: "июля",
-  8: "августа",
-  9: "сентября",
-  10: "октября",
-  11: "ноября",
-  12: "декабря",
+const Map<int, Map<String, String>> months = {
+  1: {"fullDeclination": "января", "short": "янв"},
+  2: {"fullDeclination": "февраля", "short": "фев"},
+  3: {"fullDeclination": "марта", "short": "мар"},
+  4: {"fullDeclination": "апреля", "short": "апр"},
+  5: {"fullDeclination": "мая", "short": "май"},
+  6: {"fullDeclination": "июня", "short": "июнь"},
+  7: {"fullDeclination": "июля", "short": "июль"},
+  8: {"fullDeclination": "августа", "short": "авг"},
+  9: {"fullDeclination": "сентября", "short": "сен"},
+  10: {"fullDeclination": "октября", "short": "окт"},
+  11: {"fullDeclination": "ноября", "short": "ноя"},
+  12: {"fullDeclination": "декабря", "short": "дек"},
 };
