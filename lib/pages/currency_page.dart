@@ -99,8 +99,13 @@ class _CurrencyPageState extends State<CurrencyPage> {
                   hintText: "Введите сумму",
                 ),
                 Text(
-                  "обновлено: " + "10 марта 18:50",
+                  "обновлено: " +
+                      currencyPageDataBox
+                          .get(kCurrenciesUpdateTime)["updatedAt"],
                   style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                ),
+                SizedBox(
+                  height: 4.0,
                 ),
 //                SubmitButton(
 //                  buttonTitle: "Конвертировать",

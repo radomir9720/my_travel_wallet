@@ -33,13 +33,11 @@ class ApiData {
       jsonResponse["data"].forEach((key, value) {
         Map<dynamic, dynamic> tempDic =
             currencyPageDataBox.get(kCurrencyPageValueKey) ?? {};
-        tempDic[key] = {
-          "value": value,
-          "updated":
-              "${dt.day} ${months[dt.month]} ${dt.hour}:${dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute}"
-        };
+        tempDic[key] = {"value": value,};
         currencyPageDataBox.put(kCurrencyPageValueKey, tempDic);
       });
+      currencyPageDataBox.put(kCurrenciesUpdateTime, {"updatedAt":
+      "${dt.day} ${months[dt.month]} ${dt.hour}:${dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute}"});
     }
   }
 
