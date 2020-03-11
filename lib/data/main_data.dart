@@ -49,11 +49,14 @@ void initCurrencyPageData() async {
       }
     });
   }
+  if (currencyPageDataBox.get(kCurrencyPageEnterSumFieldKey) == null) {
+    currencyPageDataBox.put(kCurrencyPageEnterSumFieldKey, {"sum": "1"});
+  }
 
   List<String> _allPairs = [];
   currencies.forEach((key, value) {
     for (String k in currencies[key]["allowable_cur_list"]) {
-      _allPairs.add(key+k);
+      _allPairs.add(key + k);
     }
   });
   ApiData().initApiData(_allPairs);

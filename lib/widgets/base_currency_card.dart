@@ -33,10 +33,14 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Image(
-                image: AssetImage("assets/images/flags/" + widget.imgName),
-                height: 35.0,
+              Material(
+                elevation: 10.0,
+                child: Image(
+                  fit: BoxFit.fill,
+                  image: AssetImage("assets/images/flags/" + widget.imgName),
+                  height: 35.0,
                 width: 60.0,
+                ),
               ),
               Text(
                 widget.currencyCode,

@@ -36,7 +36,7 @@ class ApiData {
         tempDic[key] = {"value": value,};
         currencyPageDataBox.put(kCurrencyPageValueKey, tempDic);
       });
-      currencyPageDataBox.put(kCurrenciesUpdateTime, {"updatedAt":
+      currencyPageDataBox.put(kCurrenciesUpdateTimeKey, {"updatedAt":
       "${dt.day} ${months[dt.month]} ${dt.hour}:${dt.minute < 10 ? "0" + dt.minute.toString() : dt.minute}"});
     }
   }

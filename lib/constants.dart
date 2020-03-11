@@ -58,7 +58,8 @@ const String kCurrencyPageToConvertCardKey = 'toConvert';
 //const String kHiveBoxDataKey = 'hiveBoxData';
 //const String kHiveBoxDataBaseCurrencyKey = 'baseCurrency';
 const String kCurrencyPageValueKey = 'currencyValue';
-const String kCurrenciesUpdateTime = 'updatedAt';
+const String kCurrenciesUpdateTimeKey = 'updatedAt';
+const String kCurrencyPageEnterSumFieldKey = 'enterSum';
 
 // ===================== DateTime ===================== \\
 

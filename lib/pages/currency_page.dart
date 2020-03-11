@@ -21,6 +21,21 @@ class CurrencyPage extends StatefulWidget {
 
 class _CurrencyPageState extends State<CurrencyPage> {
   List<BaseCurrencyCard> listItems = [];
+  TextEditingController _controller = TextEditingController();
+  RegExp enterSumTextFieldRegExp = RegExp(r"[[0-9]\.]");
+
+  @override
+  void initState() {
+    _controller.text =
+        currencyPageDataBox.get(kCurrencyPageEnterSumFieldKey)["sum"];
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +111,17 @@ class _CurrencyPageState extends State<CurrencyPage> {
                 ),
                 TextInputField(
                   keyboardType: TextInputType.numberWithOptions(),
+                  controller: _controller,
                   hintText: "Введите сумму",
+                  onChanged: (String text) {
+                    currencyPageDataBox
+                        .put(kCurrencyPageEnterSumFieldKey, {"sum": text});
+                  },
                 ),
                 Text(
                   "обновлено: " +
                       currencyPageDataBox
-                          .get(kCurrenciesUpdateTime)["updatedAt"],
+                          .get(kCurrenciesUpdateTimeKey)["updatedAt"],
                   style: TextStyle(fontSize: 12.0, color: Colors.grey),
                 ),
                 SizedBox(
@@ -159,11 +179,15 @@ class _CurrencyPageState extends State<CurrencyPage> {
                       child: Container(
                         child: ToConvertCurrencyCard(
                           currencyName: currencyName,
+                          currencyCode: currencyCode,
                           currencySymbol: currencySymbol,
                           imgName: imageName,
                           currencyValue:
-                              getCurrencyValue(keys[index]).values.first,
-                          updatedAt: getCurrencyValue(keys[index]).keys.first,
+                              getCurrencyValue(keys[index]),
+                          baseCurrencyCode: currencyPageDataBox
+                              .get(kBaseCurrencyKey)["currencyCode"],
+                          enteredSum: currencyPageDataBox
+                              .get(kCurrencyPageEnterSumFieldKey)["sum"],
                         ),
                       ),
                       onDismissed: (direction) {
@@ -243,25 +267,28 @@ class _CurrencyPageState extends State<CurrencyPage> {
     );
   }
 
-  Map<String, String> getCurrencyValue(index) {
-    String updatedAt;
+  String getCurrencyValue(index) {
     String value;
     try {
-      updatedAt = currencyPageDataBox.get(kCurrencyPageValueKey)[
-          currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"] +
-              currencies[
-                  currencyPageDataBox.get(kCurrencyPageToConvertCardKey)[index]
-                      ["currencyCode"]]["cur_code"]]["updated"];
       value = currencyPageDataBox.get(kCurrencyPageValueKey)[
           currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"] +
               currencies[
                   currencyPageDataBox.get(kCurrencyPageToConvertCardKey)[index]
                       ["currencyCode"]]["cur_code"]]["value"];
     } catch (e) {
-      updatedAt = "";
       value = "";
     }
-    return {updatedAt: value};
+    return value;
+  }
+
+  double getParsedSum(String sum) {
+    double value;
+    try {
+      value = double.parse(sum);
+    } catch (e) {
+      value = 1;
+    }
+    return value;
   }
 
   void deleteItem(index) {
