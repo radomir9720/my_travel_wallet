@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/utilities/currencies.dart';
+import 'package:my_travel_wallet/widgets/base_currency_card.dart';
 import 'package:my_travel_wallet/widgets/date_picker_widget.dart';
 import 'package:my_travel_wallet/widgets/dialog_window.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
+import 'package:my_travel_wallet/widgets/title_text_widget.dart';
+
+import 'currency_search_view.dart';
 
 class AddNewTravelCardPage extends StatefulWidget {
   static String id = 'addNewTravelCard';
@@ -17,9 +22,13 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
   TextEditingController _travelNameController = TextEditingController();
   TextEditingController _dateFromController = TextEditingController();
   TextEditingController _dateToController = TextEditingController();
+  String expensesCurrencyCode;
+  String toConvertCurrencyCode;
 
   @override
   void initState() {
+    expensesCurrencyCode = "USD";
+    toConvertCurrencyCode = "RUB";
     _dateFromController.text = DateTime.now().toString().split(" ")[0];
     _dateToController.text =
         DateTime.now().add(Duration(days: 7)).toString().split(" ")[0];
@@ -63,27 +72,23 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
               color: prefs.getMainThemeColor(),
             ),
             padding: kPadding,
-            child: Column(
+            child: ListView(
 //              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  "Введите название путешествия:",
-                  style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
-                ),
+                TitleText(text: "Куда собрались:"),
                 TextInputField(
                   controller: _travelNameController,
                   checkIfIsValid: (controller) {
-                    return controller.text.length <= 50;
+                    return controller.text.length <= 25;
                   },
-                  errorText: "К-во символов должно быть не более 50.",
+                  errorText: "К-во символов должно быть не более 25.",
                   hintText: "Например: Ямайка :)",
                 ),
                 Divider(
                   color: prefs.getThemeAccentColor(),
                 ),
-                Text(
-                  "Выберите даты путешествия:",
-                  style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
+                TitleText(
+                  text: "Когда:",
                 ),
                 Row(
                   children: <Widget>[
@@ -95,23 +100,88 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                     DatePickerWidget(
                       controller: _dateToController,
                       format: "yyyy-MM-dd",
-//                      initialValue: DateTime.now().add(
-//                        Duration(days: 7),
-//                      ),
                       hintText: "По какую дату",
                     ),
                   ],
                 ),
+                Divider(
+                  color: prefs.getThemeAccentColor(),
+                ),
+                TitleText(
+                  text: "Валюта расходов по умолчанию:",
+                ),
+//                Text(
+//                  "Валюта расходов по умолчанию:",
+//                  textAlign: TextAlign.center,
+//                  style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
+//                ),
+                BaseCurrencyCard(
+                  imgName: currencies[expensesCurrencyCode]["img_name"],
+                  currencyName: currencies[expensesCurrencyCode]["cur_name"],
+                  currencySymbol: currencies[expensesCurrencyCode]
+                      ["cur_symbol"],
+                  currencyCode: currencies[expensesCurrencyCode]["cur_code"],
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      child: CurrencySearchView(
+                        additionalFilter: currencies[toConvertCurrencyCode]
+                            ["allowable_cur_list"],
+                      ),
+                    ).then(
+                      (valueFromDialog) {
+                        if (valueFromDialog != null) {
+                          expensesCurrencyCode =
+                              currencyNameAndCode[valueFromDialog];
+                          setState(() {});
+                        }
+                      },
+                    );
+                  },
+                ),
+//                Text(
+//                  "Валюта конвертации:",
+//                  textAlign: TextAlign.center,
+//                  style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
+//                ),
+                TitleText(
+                  text: "Валюта конвертации:",
+                ),
+                BaseCurrencyCard(
+                  imgName: currencies[toConvertCurrencyCode]["img_name"],
+                  currencyName: currencies[toConvertCurrencyCode]["cur_name"],
+                  currencySymbol: currencies[toConvertCurrencyCode]
+                      ["cur_symbol"],
+                  currencyCode: currencies[toConvertCurrencyCode]["cur_code"],
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      child: CurrencySearchView(
+                        additionalFilter: currencies[expensesCurrencyCode]
+                            ["allowable_cur_list"],
+                      ),
+                    ).then(
+                      (valueFromDialog) {
+                        if (valueFromDialog != null) {
+                          toConvertCurrencyCode =
+                              currencyNameAndCode[valueFromDialog];
+                          setState(() {});
+                        }
+                      },
+                    );
+                  },
+                ),
                 SubmitButton(
                   buttonTitle: "Добавить путешествие",
                   onPressed: () {
-                    if (_travelNameController.text.length == 0) {
+                    if (_travelNameController.text.length == 0 ||
+                        _travelNameController.text.length > 25) {
                       showDialog(
                         context: context,
                         child: DialogWindow(
-                          mainText: "Введите название путешествия!",
+                          mainText: "Введите страну назначения!",
                           detailText:
-                              "Поле с названием путешествия должно содержать от 1 до 50 символов",
+                              "Поле с названием страны должно содержать от 1 до 25 символов",
                           fractionRatio: 0.3,
                           neutralButtonText: "Понятно",
                           neutralButtonFunction: () =>
@@ -124,15 +194,21 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                       DateTime dateTo = DateTime.parse(_dateToController.text);
 //                      print(months[dateFrom.month]["short"]);
                       Map<dynamic, dynamic> tempMap =
-                          currencyPageDataBox.get(kHomePageTravelCardKey);
+                          currencyPageDataBox.get(kHomePageTravelCardKey) ?? {};
                       tempMap[DateTime.now().millisecondsSinceEpoch] = {
                         "travelName": _travelNameController.text.toString(),
                         "dateFrom":
                             "${dateFrom.day} ${months[dateFrom.month]["short"]} ${dateFrom.year}",
                         "dateTo":
                             "${dateTo.day} ${months[dateTo.month]["short"]} ${dateTo.year}",
+                        "expensesAmount": 0,
+                        "defaultExpensesCurrencyCode": expensesCurrencyCode,
+                        "toConvertCurrencyCode": toConvertCurrencyCode,
                       };
                       currencyPageDataBox.put(kHomePageTravelCardKey, tempMap);
+//                      print(currencyPageDataBox.get(kHomePageTravelCardKey));
+//                      currencyPageDataBox.put(kHomePageTravelCardKey, {});
+                      Navigator.of(context).pop();
                     }
                   },
                 )

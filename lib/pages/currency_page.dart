@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
@@ -8,7 +7,6 @@ import 'package:my_travel_wallet/widgets/base_currency_card.dart';
 import 'package:my_travel_wallet/widgets/currency_search_view.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
-import 'package:my_travel_wallet/utilities/api.dart';
 import 'package:my_travel_wallet/widgets/to_convert_currency_card.dart';
 
 class CurrencyPage extends StatefulWidget {

@@ -58,7 +58,7 @@ class _TextInputFieldState extends State<TextInputField> {
         cursorColor: prefs.getThemeAccentColor(),
         decoration: InputDecoration(
           helperText: _isValid ? null : widget.errorText,
-          helperMaxLines: 2,
+          helperMaxLines: 3,
           helperStyle: TextStyle(
             color: Colors.red,
           ),

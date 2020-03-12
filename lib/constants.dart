@@ -51,6 +51,7 @@ const double kBorderRadiusDouble = 4.0;
 const Radius kBorderRadius = Radius.circular(kBorderRadiusDouble);
 const double kPaddingDouble = 8.0;
 const EdgeInsets kPadding = EdgeInsets.all(kPaddingDouble);
+const double kTitleTextFontSize = 20.0;
 
 // ===================== Keys ===================== \\
 
@@ -67,6 +68,7 @@ const String kCurrencyPageValueKey = 'currencyValue';
 const String kCurrenciesUpdateTimeKey = 'updatedAt';
 const String kCurrencyPageEnterSumFieldKey = 'enterSum';
 const String kHomePageTravelCardKey = 'travelCard';
+const String kHomePageTravelExpensesKey = 'travelCardExpenses';
 
 // ===================== DateTime ===================== \\
 

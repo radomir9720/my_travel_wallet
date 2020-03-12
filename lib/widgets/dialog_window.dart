@@ -80,9 +80,10 @@ class DialogWindow extends StatelessWidget {
                     style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+//                  SizedBox(
+//                    height: 10.0,
+//                  ),
+                Divider(color: prefs.getThemeAccentColor(),),
                   detailText != null
                       ? Text(
                           detailText,

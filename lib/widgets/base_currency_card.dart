@@ -8,8 +8,8 @@ class BaseCurrencyCard extends StatefulWidget {
     this.currencyCode,
     this.currencyName,
     this.currencySymbol,
-    this.onPressed,
-    this.currencyValue,
+    @required this.onPressed,
+//    this.currencyValue,
   });
 
   final String imgName;
@@ -17,7 +17,7 @@ class BaseCurrencyCard extends StatefulWidget {
   final String currencyName;
   final String currencySymbol;
   final Function onPressed;
-  final String currencyValue;
+//  final String currencyValue;
 
   @override
   _BaseCurrencyCardState createState() => _BaseCurrencyCardState();
@@ -40,7 +40,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
                   fit: BoxFit.fill,
                   image: AssetImage("assets/images/flags/" + widget.imgName),
                   height: 35.0,
-                width: 60.0,
+                  width: 60.0,
                 ),
               ),
               Text(
@@ -48,7 +48,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
                 style: prefs.getMainTextStyle(),
               ),
               Container(
-                width: MediaQuery.of(context).size.width *0.4,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: Text(
                   widget.currencyName,
                   style: prefs.getMainTextStyle(),
@@ -56,25 +56,11 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
                   softWrap: false,
                 ),
               ),
-              widget.currencyValue == null ? Text(widget.currencySymbol, style: prefs.getMainTextStyle()) : SizedBox(),
-              widget.currencyValue == null
-                  ? Icon(
-                      Icons.keyboard_arrow_down,
-                      color: prefs.getThemeAccentColor(),
-                    )
-                  : Container(
-                      padding: EdgeInsets.all(4.0),
-                      decoration: BoxDecoration(
-                        color: prefs.getThemeAccentColor(),
-                        borderRadius: BorderRadius.all(
-                          kBorderRadius,
-                        ),
-                      ),
-                      child: Text(
-                        widget.currencyValue + (widget.currencySymbol == "" ? "" : " " + widget.currencySymbol),
-                        style: TextStyle(
-                            fontSize: 20.0, color: prefs.getMainThemeColor()),
-                      )),
+              Text(widget.currencySymbol, style: prefs.getMainTextStyle()),
+              Icon(
+                Icons.keyboard_arrow_down,
+                color: prefs.getThemeAccentColor(),
+              )
             ],
           ),
         ),

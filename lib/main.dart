@@ -4,6 +4,7 @@ import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sig
 import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/widgets/add_new_travel_card_page.dart';
+import 'package:my_travel_wallet/widgets/travel_page_detail.dart';
 
 void main() => runApp(MyTravelWallet());
 
@@ -51,6 +52,7 @@ class _MyTravelWalletState extends State<MyTravelWallet> {
       routes: {
         SignInPage.id: (context) => SignInPage(),
         AddNewTravelCardPage.id: (context) => AddNewTravelCardPage(),
+        TravelPageDetail.id: (context) => TravelPageDetail(),
       },
       title: 'Приложение для учета финансов в путешествиях.',
       theme: ThemeData(

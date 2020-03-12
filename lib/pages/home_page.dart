@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/widgets/add_new_travel_card_page.dart';
 import 'package:my_travel_wallet/widgets/avatar_widget.dart';
 import 'package:my_travel_wallet/widgets/home_page_travel_card.dart';
 import 'package:my_travel_wallet/widgets/sign_in_button.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.key});
@@ -57,20 +60,42 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              HomePageTravelCard(
-                travelName: "Ямайка",
-                travelDates: "10 мар 2020 - 25 мар 2020",
-                travelAmount: "123123.21",
-                travelCurrencyCode: "руб",
-              ),
-            ],
+          Expanded(
+            child: ValueListenableBuilder(
+              valueListenable: currencyPageDataBox.listenable(),
+              builder: (context, currencyPageDataBox, widget) {
+                return ListView.builder(
+                  itemCount:
+                      (currencyPageDataBox.get(kHomePageTravelCardKey) ?? {})
+                          .length,
+                  itemBuilder: (context, index) {
+                    List<dynamic> keys = currencyPageDataBox
+                        .get(kHomePageTravelCardKey)
+                        .keys
+                        .toList();
+                    Map<dynamic, dynamic> travelCardsMap = currencyPageDataBox
+                        .get(kHomePageTravelCardKey)[keys[index]];
+//                    print(keys[index].runtimeType);
+                    return HomePageTravelCard(
+                      travelName: travelCardsMap["travelName"],
+                      travelDates:
+                          "${travelCardsMap["dateFrom"]} - ${travelCardsMap["dateTo"]}",
+                      travelAmount: travelCardsMap["expensesAmount"].toString(),
+                      travelCurrencyCode:
+                          currencies[travelCardsMap["toConvertCurrencyCode"]]
+                              ["cur_symbol"],
+                      arguments: {keys[index]: travelCardsMap},
+                    );
+                  },
+//                  shrinkWrap: true,
+                );
+              },
+            ),
           ),
           SubmitButton(
             buttonTitle: "Добавить путешествие",
-            onPressed: () => Navigator.of(context).pushNamed(AddNewTravelCardPage.id),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(AddNewTravelCardPage.id),
           )
         ],
       ),
