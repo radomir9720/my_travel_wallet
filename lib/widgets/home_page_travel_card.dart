@@ -4,6 +4,7 @@ import 'package:my_travel_wallet/widgets/small_button.dart';
 import 'package:my_travel_wallet/widgets/travel_page_detail.dart';
 
 import '../constants.dart';
+import 'add_new_expense_view.dart';
 
 class HomePageTravelCard extends StatefulWidget {
   HomePageTravelCard(
@@ -72,7 +73,7 @@ class _HomePageTravelCardState extends State<HomePageTravelCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.all(2.0),
+                          padding: EdgeInsets.all(kPaddingDouble/2),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(kBorderRadius),
                             color: prefs.getThemeAccentColor(),
@@ -93,7 +94,22 @@ class _HomePageTravelCardState extends State<HomePageTravelCard> {
                     ),
                     SmallButton(
                       buttonTitle: "Добавить расход",
-                      onPressed: () => print("Home Page small button"),
+                      onPressed: () {
+                        print(widget.arguments);
+                        showDialog(
+                          context: context,
+                          child: Scaffold(
+                            backgroundColor: Colors.black.withOpacity(0.1),
+                            body: AddNewExpenseView(
+                              defaultBaseCurrency: widget.arguments
+                                  .values.first["defaultExpensesCurrencyCode"],
+                              travelCardKey: widget.arguments.keys.first,
+                              toConvertCurrencyCode:
+                              widget.arguments.values.first["toConvertCurrencyCode"],
+                            ),
+                          ),
+                        );
+                      },
                       height: 40.0,
                     ),
                   ])

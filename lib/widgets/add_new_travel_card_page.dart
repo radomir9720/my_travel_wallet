@@ -182,7 +182,6 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                           mainText: "Введите страну назначения!",
                           detailText:
                               "Поле с названием страны должно содержать от 1 до 25 символов",
-                          fractionRatio: 0.3,
                           neutralButtonText: "Понятно",
                           neutralButtonFunction: () =>
                               Navigator.of(context).pop(),
@@ -206,7 +205,7 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                         "toConvertCurrencyCode": toConvertCurrencyCode,
                       };
                       currencyPageDataBox.put(kHomePageTravelCardKey, tempMap);
-//                      print(currencyPageDataBox.get(kHomePageTravelCardKey));
+                      print(currencyPageDataBox.get(kHomePageTravelCardKey));
 //                      currencyPageDataBox.put(kHomePageTravelCardKey, {});
                       Navigator.of(context).pop();
                     }

@@ -64,14 +64,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     // Если не залогинен, выводим диалоговое окно с данной информацией
                     ? DialogWindow(
                         mainText: "Вы не авторизованы",
-                        fractionRatio: 0.2,
                         neutralButtonText: "Понятно",
                         neutralButtonFunction: () => Navigator.pop(context),
                       )
                     // Если залогинен, показываем диалоговое окно с выбором
                     : DialogWindow(
                         mainText: "Вы точно хотите выйти?",
-                        fractionRatio: 0.3,
                         detailText:
                             "Авторизация нужна для синхронизации данных. При входе в данное приложение на другом устройстве данные синхронизируются.",
                         positiveButtonFunction: () {

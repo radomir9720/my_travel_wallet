@@ -48,7 +48,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                         child: Image(
                           fit: BoxFit.fill,
                           image: AssetImage(
-                              "assets/images/flags/" + widget.imgName),
+                              kPathToImages + widget.imgName),
                           height: 35.0,
                           width: 60.0,
                         ),

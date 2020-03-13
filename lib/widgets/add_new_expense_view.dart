@@ -56,6 +56,7 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
 
   @override
   Widget build(BuildContext context) {
+//    print(currencyPageDataBox.get(kHomePageTravelExpensesKey) ?? {}[widget.travelCardKey]);
     return Padding(
       padding: kPadding,
       child: Container(
@@ -194,7 +195,6 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
                           context: context,
                           child: DialogWindow(
                             mainText: "Заполните корректно поля",
-                            fractionRatio: 0.4,
                             neutralButtonText: "Понятно",
                             neutralButtonFunction: () =>
                                 Navigator.of(context).pop(),
@@ -202,24 +202,10 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
                           ),
                         );
                       } else {
-                        Map<dynamic, dynamic> tempMap = (currencyPageDataBox
-                                    .get(kHomePageTravelExpensesKey) ??
-                                {})[widget.travelCardKey] ??
-                            {};
-                        DateTime _expenseDate =
-                            DateTime.parse(_datePickerController.text);
-                        tempMap[DateTime.now().millisecondsSinceEpoch] = {
-                          "expenseName": _expenseNameController.text,
-                          "expenseDate":
-                              "${_expenseDate.day} ${months[_expenseDate.month]["short"]} ${_expenseDate.year}",
-                          "expenseSum": _expenseSumController.text,
-                          "expenseCurrency": _baseCurrency,
-                          "convertedExpenseSum": _convertedExpenseValue,
-                        };
-                        currencyPageDataBox.put(kHomePageTravelExpensesKey,
-                            {widget.travelCardKey: tempMap});
-                        print(currencyPageDataBox
-                            .get(kHomePageTravelExpensesKey));
+                        addNewExpense();
+                        updateExpensesAmount();
+//                        print(currencyPageDataBox
+//                            .get(kHomePageTravelExpensesKey));
                         Navigator.of(context).pop();
                       }
                     },
@@ -231,5 +217,45 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
         ),
       ),
     );
+  }
+
+  void addNewExpense() {
+    Map<dynamic, dynamic> tempMap =
+        (currencyPageDataBox.get(kHomePageTravelExpensesKey) ?? {});
+    Map<dynamic, dynamic> travelDataTempMap =
+        tempMap[widget.travelCardKey] ?? {};
+    DateTime _expenseDate = DateTime.parse(_datePickerController.text);
+    travelDataTempMap[_expenseDate
+        .add(Duration(microseconds: DateTime.now().millisecondsSinceEpoch))
+        .millisecondsSinceEpoch] = {
+      "expenseName": _expenseNameController.text,
+      "expenseDate":
+          "${_expenseDate.day} ${months[_expenseDate.month]["short"]} ${_expenseDate.year}",
+      "expenseSum": _expenseSumController.text,
+      "expenseCurrency": _baseCurrency,
+      "convertedExpenseSum": _convertedExpenseValue,
+    };
+    tempMap[widget.travelCardKey] = travelDataTempMap;
+    currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
+  }
+
+  void updateExpensesAmount() {
+    Map<dynamic, dynamic> generalTempMap =
+        (currencyPageDataBox.get(kHomePageTravelCardKey));
+    Map<dynamic, dynamic> tempMap = generalTempMap[widget.travelCardKey];
+    double travelAmount = 0;
+    (currencyPageDataBox.get(kHomePageTravelExpensesKey) ??
+            {}[widget.travelCardKey])
+        .forEach((key, value) {
+      value.forEach((k, v) {
+        travelAmount += double.parse(v["convertedExpenseSum"]);
+      });
+    });
+    tempMap["expensesAmount"] = travelAmount;
+    generalTempMap[widget.travelCardKey] = tempMap;
+//    print(travelAmount);
+//    print(generalTempMap);
+//    tempMap[travlCardKey] = ;
+  currencyPageDataBox.put(kHomePageTravelCardKey, generalTempMap);
   }
 }

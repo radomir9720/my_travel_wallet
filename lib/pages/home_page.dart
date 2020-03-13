@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       travelName: travelCardsMap["travelName"],
                       travelDates:
                           "${travelCardsMap["dateFrom"]} - ${travelCardsMap["dateTo"]}",
-                      travelAmount: travelCardsMap["expensesAmount"].toString(),
+                      travelAmount: travelCardsMap["expensesAmount"].toStringAsFixed(2),
                       travelCurrencyCode:
                           currencies[travelCardsMap["toConvertCurrencyCode"]]
                               ["cur_symbol"],

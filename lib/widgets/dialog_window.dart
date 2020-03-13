@@ -7,7 +7,6 @@ class DialogWindow extends StatelessWidget {
   DialogWindow({
     @required this.mainText,
     this.detailText,
-    @required this.fractionRatio,
     this.positiveButtonFunction,
     this.positiveButtonText,
     this.negativeButtonFunction,
@@ -17,7 +16,6 @@ class DialogWindow extends StatelessWidget {
   });
   final String mainText;
   final String detailText;
-  final double fractionRatio;
   final Function positiveButtonFunction;
   final String positiveButtonText;
   final Function negativeButtonFunction;
@@ -58,13 +56,13 @@ class DialogWindow extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.1),
-      body: Center(
-        child: FractionallySizedBox(
-          heightFactor: fractionRatio,
-          child: Padding(
-            padding: kPadding,
-            child: Container(
-              alignment: Alignment.center,
+      body: Padding(
+        padding: kPadding,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            SizedBox(),
+            Container(
               decoration: BoxDecoration(
                 color: prefs.getMainThemeColor(),
                 borderRadius: BorderRadius.all(
@@ -73,17 +71,16 @@ class DialogWindow extends StatelessWidget {
               ),
               padding: kPadding,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
                     mainText,
                     style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
                     textAlign: TextAlign.center,
                   ),
-//                  SizedBox(
-//                    height: 10.0,
-//                  ),
-                Divider(color: prefs.getThemeAccentColor(),),
+                  Divider(
+                    color: prefs.getThemeAccentColor(),
+                  ),
                   detailText != null
                       ? Text(
                           detailText,
@@ -101,7 +98,8 @@ class DialogWindow extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+            SizedBox(),
+          ],
         ),
       ),
     );

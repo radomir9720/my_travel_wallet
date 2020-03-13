@@ -52,6 +52,7 @@ const Radius kBorderRadius = Radius.circular(kBorderRadiusDouble);
 const double kPaddingDouble = 8.0;
 const EdgeInsets kPadding = EdgeInsets.all(kPaddingDouble);
 const double kTitleTextFontSize = 20.0;
+const String kPathToImages = "assets/images/flags/";
 
 // ===================== Keys ===================== \\
 

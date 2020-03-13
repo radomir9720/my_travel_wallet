@@ -38,7 +38,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
                 elevation: 10.0,
                 child: Image(
                   fit: BoxFit.fill,
-                  image: AssetImage("assets/images/flags/" + widget.imgName),
+                  image: AssetImage(kPathToImages + widget.imgName),
                   height: 35.0,
                   width: 60.0,
                 ),
