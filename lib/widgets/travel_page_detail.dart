@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/pages/home_page/functions/updateTravelCardExpensesAmount.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
-import 'package:my_travel_wallet/widgets/add_new_expense_view.dart';
+import 'package:my_travel_wallet/pages/home_page/add_new_expense_view.dart';
 import 'package:my_travel_wallet/widgets/dialog_window.dart';
+import 'package:my_travel_wallet/widgets/stack_behind_dismiss.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
@@ -102,129 +104,157 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
                                   ),
                                 )
                               : SizedBox(),
-                          Padding(
-                            padding: kPadding,
-                            child: Material(
-                              borderRadius: BorderRadius.all(kBorderRadius),
-                              elevation: 10.0,
-                              child: Container(
+                          Dismissible(
+                            background: stackBehindDismiss(),
+                            key: ObjectKey(keys[index]),
+                            child: Padding(
+                              padding: kPadding,
+                              child: Material(
+                                borderRadius: BorderRadius.all(kBorderRadius),
+                                elevation: 10.0,
+                                child: Container(
 //                          height: 100.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(kBorderRadius),
-                                  color: prefs.getMainThemeColor(),
-                                ),
-                                child: Padding(
-                                  padding: kPadding,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Stack(
-                                            children: <Widget>[
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 25.0),
-                                                child: Material(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(kBorderRadius),
+                                    color: prefs.getMainThemeColor(),
+                                  ),
+                                  child: Padding(
+                                    padding: kPadding,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Stack(
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 25.0),
+                                                  child: Material(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(100.0),
+                                                    ),
+                                                    elevation: 10.0,
+                                                    child: ClipRRect(
+                                                      child: Image(
+                                                        height: 40.0,
+                                                        width: 40.0,
+                                                        fit: BoxFit.fitHeight,
+                                                        image: AssetImage(kPathToImages +
+                                                            currencies[arguments
+                                                                        .values
+                                                                        .first[
+                                                                    "toConvertCurrencyCode"]]
+                                                                ["img_name"]),
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(100.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Material(
+                                                  elevation: 10.0,
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                    Radius.circular(100.0),
-                                                  ),
-                                                  elevation: 10.0,
+                                                          Radius.circular(
+                                                              100.0)),
                                                   child: ClipRRect(
                                                     child: Image(
                                                       height: 40.0,
                                                       width: 40.0,
                                                       fit: BoxFit.fitHeight,
                                                       image: AssetImage(
-                                                          kPathToImages +
-                                                              currencies[arguments
-                                                                          .values
-                                                                          .first[
-                                                                      "toConvertCurrencyCode"]]
-                                                                  ["img_name"]),
+                                                        kPathToImages +
+                                                            currencies[expensesMap[
+                                                                    "expenseCurrency"]]
+                                                                ["img_name"],
+                                                      ),
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.all(
-                                                      Radius.circular(100.0),
-                                                    ),
+                                                            Radius.circular(
+                                                                100.0)),
                                                   ),
                                                 ),
-                                              ),
-                                              Material(
-                                                elevation: 10.0,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(100.0)),
-                                                child: ClipRRect(
-                                                  child: Image(
-                                                    height: 40.0,
-                                                    width: 40.0,
-                                                    fit: BoxFit.fitHeight,
-                                                    image: AssetImage(
-                                                      kPathToImages +
-                                                          currencies[expensesMap[
-                                                                  "expenseCurrency"]]
-                                                              ["img_name"],
-                                                    ),
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              100.0)),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 7, top: 24.0),
-                                                child: Material(
-                                                  elevation: 10.0,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              100.0)),
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 7, top: 24.0),
+                                                  child: Material(
+                                                    elevation: 10.0,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                100.0)),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                          color: prefs
+                                                              .getThemeAccentColor(),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      100.0))),
+                                                      child: Icon(
+                                                        Icons
+                                                            .keyboard_arrow_down,
                                                         color: prefs
-                                                            .getThemeAccentColor(),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    100.0))),
-                                                    child: Icon(
-                                                      Icons.keyboard_arrow_down,
-                                                      color: prefs
-                                                          .getThirdThemeColor(),
+                                                            .getThirdThemeColor(),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 5.0,
-                                          ),
-                                          TitleText(
-                                              text: expensesMap["expenseName"]),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          TitleText(
-                                              text:
-                                                  "${expensesMap["expenseSum"]} ${currencies[expensesMap["expenseCurrency"]]["cur_symbol"]}"),
-                                          TitleText(
-                                              text:
-                                                  "${expensesMap["convertedExpenseSum"]} ${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}"),
-                                        ],
-                                      ),
-                                    ],
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 5.0,
+                                            ),
+                                            TitleText(
+                                                text:
+                                                    expensesMap["expenseName"]),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: <Widget>[
+                                            TitleText(
+                                                text:
+                                                    "${expensesMap["expenseSum"]} ${currencies[expensesMap["expenseCurrency"]]["cur_symbol"]}"),
+                                            TitleText(
+                                                text:
+                                                    "${expensesMap["convertedExpenseSum"]} ${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}"),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
+                            onDismissed: (direction) {
+                              var item = expensesMap;
+                              //To show a snackbar with the UNDO button
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      "Расход ${expensesMap["expenseName"]} удален"),
+                                  action: SnackBarAction(
+                                    label: "Отменить",
+                                    onPressed: () {
+                                      //To undo deletion
+                                      addItem(
+                                          arguments.keys.first, keys[index], item);
+                                    },
+                                  ),
+                                ),
+                              );
+                              //To delete
+                              deleteItem(arguments.keys.first, keys[index]);
+                            },
                           ),
                         ],
                       );
@@ -248,7 +278,7 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
                       TitleText(
                           text:
                               "${getExpensesAmount(getExpensesMap(arguments.keys.first))} "
-                                  "${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}")
+                              "${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}")
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
@@ -319,4 +349,37 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     tempMap.remove(currentTravelCardKey);
     currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
   }
+
+  void deleteItem(int travelKey, int expenseKey) {
+    /*
+    By implementing this method, it ensures that upon being dismissed from our widget tree,
+    the item is removed from our list of items and our list is updated, hence
+    preventing the "Dismissed widget still in widget tree error" when we reload.
+    */
+
+    Map<dynamic, dynamic> tempMap =
+        currencyPageDataBox.get(kHomePageTravelExpensesKey);
+    Map<dynamic, dynamic> expenseTempMap = tempMap[travelKey];
+    expenseTempMap.remove(expenseKey);
+    tempMap[travelKey] = expenseTempMap;
+    currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
+    updateExpensesAmount(travelKey);
+    setState(() {});
+  }
+
+  void addItem(int travelKey, int expenseKey, item) {
+    /*
+    This method accepts the parameters index and item and re-inserts the {item} at
+    index {index}
+    */
+    Map<dynamic, dynamic> tempMap =
+        currencyPageDataBox.get(kHomePageTravelExpensesKey);
+    Map<dynamic, dynamic> expenseTempMap = tempMap[travelKey];
+    expenseTempMap[expenseKey] = item;
+    tempMap[travelKey] = expenseTempMap;
+    currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
+    updateExpensesAmount(travelKey);
+    setState(() {});
+  }
+
 }

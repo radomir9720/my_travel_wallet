@@ -47,8 +47,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                         elevation: 10.0,
                         child: Image(
                           fit: BoxFit.fill,
-                          image: AssetImage(
-                              kPathToImages + widget.imgName),
+                          image: AssetImage(kPathToImages + widget.imgName),
                           height: 35.0,
                           width: 60.0,
                         ),
@@ -95,7 +94,7 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                       height: 2.0,
                     ),
                     Text(
-                      "1 ${widget.baseCurrencyCode} = ${double.tryParse(widget.currencyValue).toStringAsFixed(2)} ${widget.currencyCode}",
+                      "1 ${widget.baseCurrencyCode} = ${double.tryParse(widget.currencyValue)?.toStringAsFixed(2)} ${widget.currencyCode}",
                       style: prefs.getMainTextStyle().copyWith(fontSize: 12.0),
                     )
                   ],
@@ -119,15 +118,14 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
   String getCurrencyValueWithFixedLength(
       String currencyValue, String enteredSum, String currencySymbol) {
     double doubleValue =
-        (double.tryParse(currencyValue) * (double.tryParse(enteredSum) ?? 1));
+        (double.tryParse(currencyValue) ?? 1 * (double.tryParse(enteredSum)));
     String retValue;
     if (doubleValue > 1000000000000) {
-      retValue =
-          (doubleValue / 1000000000000).toStringAsFixed(2) + " трлн $currencySymbol";
-    }
-    else if (doubleValue > 1000000000) {
-      retValue =
-          (doubleValue / 1000000000).toStringAsFixed(2) + " млрд $currencySymbol";
+      retValue = (doubleValue / 1000000000000).toStringAsFixed(2) +
+          " трлн $currencySymbol";
+    } else if (doubleValue > 1000000000) {
+      retValue = (doubleValue / 1000000000).toStringAsFixed(2) +
+          " млрд $currencySymbol";
     } else if (doubleValue > 1000000) {
       retValue =
           (doubleValue / 1000000).toStringAsFixed(2) + " млн $currencySymbol";

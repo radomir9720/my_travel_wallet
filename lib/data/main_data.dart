@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/utilities/api.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
 import 'package:hive/hive.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ============================== Shared Preferences ============================== \\
 
@@ -60,4 +62,8 @@ void initCurrencyPageData() async {
     }
   });
   ApiData().initApiData(_allPairs);
+//  if (googleSignIn.currentUser != null && currencyPageDataBox.get(key))
+//  Map test = await getDataFromFirebase();
+//  print(test);
 }
+

@@ -5,6 +5,7 @@ import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/widgets/base_currency_card.dart';
 import 'package:my_travel_wallet/widgets/currency_search_view.dart';
+import 'package:my_travel_wallet/widgets/stack_behind_dismiss.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
 import 'package:my_travel_wallet/widgets/to_convert_currency_card.dart';
@@ -180,8 +181,9 @@ class _CurrencyPageState extends State<CurrencyPage> {
                     String currencySymbol = toConvertMap["cur_symbol"];
                     return Dismissible(
                       background: stackBehindDismiss(),
-                      key: ObjectKey(currencyPageDataBox
-                          .get(kCurrencyPageToConvertCardKey)[keys[index]]),
+                      key: ObjectKey([keys[index]]),
+//                      ObjectKey(currencyPageDataBox
+//                          .get(kCurrencyPageToConvertCardKey)[keys[index]]),
                       child: Container(
                         child: ToConvertCurrencyCard(
                           currencyName: currencyName,
@@ -311,15 +313,4 @@ class _CurrencyPageState extends State<CurrencyPage> {
 //    });
   }
 
-  Widget stackBehindDismiss() {
-    return Container(
-      alignment: Alignment.centerRight,
-      padding: EdgeInsets.only(right: 20.0),
-      color: prefs.getThemeAccentColor(),
-      child: Icon(
-        Icons.delete,
-        color: Colors.white,
-      ),
-    );
-  }
 }

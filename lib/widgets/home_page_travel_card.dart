@@ -4,10 +4,10 @@ import 'package:my_travel_wallet/widgets/small_button.dart';
 import 'package:my_travel_wallet/widgets/travel_page_detail.dart';
 
 import '../constants.dart';
-import 'add_new_expense_view.dart';
+import '../pages/home_page/add_new_expense_view.dart';
 
 class HomePageTravelCard extends StatefulWidget {
-  HomePageTravelCard(
+   HomePageTravelCard(
       {this.travelName,
       this.travelDates,
       this.travelAmount,
@@ -95,7 +95,7 @@ class _HomePageTravelCardState extends State<HomePageTravelCard> {
                     SmallButton(
                       buttonTitle: "Добавить расход",
                       onPressed: () {
-                        print(widget.arguments);
+//                        print(widget.arguments);
                         showDialog(
                           context: context,
                           child: Scaffold(

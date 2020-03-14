@@ -3,13 +3,13 @@ import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/widgets/base_currency_card.dart';
+import 'package:my_travel_wallet/widgets/currency_search_view.dart';
 import 'package:my_travel_wallet/widgets/date_picker_widget.dart';
 import 'package:my_travel_wallet/widgets/dialog_window.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
 
-import 'currency_search_view.dart';
 
 class AddNewTravelCardPage extends StatefulWidget {
   static String id = 'addNewTravelCard';
@@ -139,11 +139,6 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                     );
                   },
                 ),
-//                Text(
-//                  "Валюта конвертации:",
-//                  textAlign: TextAlign.center,
-//                  style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
-//                ),
                 TitleText(
                   text: "Валюта конвертации:",
                 ),
@@ -205,7 +200,7 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                         "toConvertCurrencyCode": toConvertCurrencyCode,
                       };
                       currencyPageDataBox.put(kHomePageTravelCardKey, tempMap);
-                      print(currencyPageDataBox.get(kHomePageTravelCardKey));
+//                      print(currencyPageDataBox.get(kHomePageTravelCardKey));
 //                      currencyPageDataBox.put(kHomePageTravelCardKey, {});
                       Navigator.of(context).pop();
                     }

@@ -8,8 +8,9 @@ import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
 
-import '../constants.dart';
-import 'date_picker_widget.dart';
+import '../../constants.dart';
+import '../../widgets/date_picker_widget.dart';
+import 'functions/updateTravelCardExpensesAmount.dart';
 
 class AddNewExpenseView extends StatefulWidget {
   AddNewExpenseView({
@@ -203,7 +204,7 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
                         );
                       } else {
                         addNewExpense();
-                        updateExpensesAmount();
+                        updateExpensesAmount(widget.travelCardKey);
 //                        print(currencyPageDataBox
 //                            .get(kHomePageTravelExpensesKey));
                         Navigator.of(context).pop();
@@ -239,23 +240,4 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
     currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
   }
 
-  void updateExpensesAmount() {
-    Map<dynamic, dynamic> generalTempMap =
-        (currencyPageDataBox.get(kHomePageTravelCardKey));
-    Map<dynamic, dynamic> tempMap = generalTempMap[widget.travelCardKey];
-    double travelAmount = 0;
-    (currencyPageDataBox.get(kHomePageTravelExpensesKey) ??
-            {}[widget.travelCardKey])
-        .forEach((key, value) {
-      value.forEach((k, v) {
-        travelAmount += double.parse(v["convertedExpenseSum"]);
-      });
-    });
-    tempMap["expensesAmount"] = travelAmount;
-    generalTempMap[widget.travelCardKey] = tempMap;
-//    print(travelAmount);
-//    print(generalTempMap);
-//    tempMap[travlCardKey] = ;
-  currencyPageDataBox.put(kHomePageTravelCardKey, generalTempMap);
-  }
 }

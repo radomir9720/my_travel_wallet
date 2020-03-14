@@ -3,12 +3,13 @@ import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
-import 'package:my_travel_wallet/widgets/add_new_travel_card_page.dart';
 import 'package:my_travel_wallet/widgets/avatar_widget.dart';
 import 'package:my_travel_wallet/widgets/home_page_travel_card.dart';
 import 'package:my_travel_wallet/widgets/sign_in_button.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'add_new_travel_card_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.key});
@@ -95,6 +96,7 @@ class _HomePageState extends State<HomePage> {
           SubmitButton(
             buttonTitle: "Добавить путешествие",
             onPressed: () =>
+//            sendDataToFirebase()
                 Navigator.of(context).pushNamed(AddNewTravelCardPage.id),
           )
         ],
