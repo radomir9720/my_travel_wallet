@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
                 imageUrl: googleSignIn.currentUser.photoUrl,
               );
               setState(() {});
+              getDataFromFirebase();
             },
           );
     super.initState();
@@ -77,11 +78,13 @@ class _HomePageState extends State<HomePage> {
                     Map<dynamic, dynamic> travelCardsMap = currencyPageDataBox
                         .get(kHomePageTravelCardKey)[keys[index]];
 //                    print(keys[index].runtimeType);
+
                     return HomePageTravelCard(
                       travelName: travelCardsMap["travelName"],
                       travelDates:
                           "${travelCardsMap["dateFrom"]} - ${travelCardsMap["dateTo"]}",
-                      travelAmount: travelCardsMap["expensesAmount"].toStringAsFixed(2),
+                      travelAmount:
+                          travelCardsMap["expensesAmount"].toStringAsFixed(2),
                       travelCurrencyCode:
                           currencies[travelCardsMap["toConvertCurrencyCode"]]
                               ["cur_symbol"],
@@ -96,7 +99,8 @@ class _HomePageState extends State<HomePage> {
           SubmitButton(
             buttonTitle: "Добавить путешествие",
             onPressed: () =>
-//            sendDataToFirebase()
+//                getDataFromFirebase(),
+//            print(currencyPageDataBox.get(kHomePageTravelExpensesKey)),
                 Navigator.of(context).pushNamed(AddNewTravelCardPage.id),
           )
         ],

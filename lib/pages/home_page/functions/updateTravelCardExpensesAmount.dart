@@ -2,7 +2,7 @@ import 'package:my_travel_wallet/data/main_data.dart';
 
 import '../../../constants.dart';
 
-void updateExpensesAmount(int travelCardKey) {
+void updateExpensesAmount(String travelCardKey) {
   Map<dynamic, dynamic> generalTempMap =
   (currencyPageDataBox.get(kHomePageTravelCardKey));
   Map<dynamic, dynamic> tempMap = generalTempMap[travelCardKey];

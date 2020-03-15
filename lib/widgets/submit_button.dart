@@ -11,13 +11,14 @@ class SubmitButton extends StatelessWidget {
     return Padding(
       padding: kPadding,
       child: MaterialButton(
+        elevation: kElevationDouble,
         color: prefs.getThemeAccentColor(),
         height: 50.0,
         minWidth: double.infinity,
         onPressed: onPressed,
         child: Text(
           buttonTitle,
-          style: prefs.getMainTextStyle().copyWith(fontSize: 15.0),
+          style: prefs.getMainTextStyle().copyWith(fontSize: 19.0),
         ),
       ),
     );

@@ -9,6 +9,7 @@ import 'package:my_travel_wallet/widgets/stack_behind_dismiss.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
+import 'package:my_travel_wallet/widgets/travel_expenses_card.dart';
 
 class TravelPageDetail extends StatefulWidget {
   static String id = 'travelPageDetail';
@@ -113,126 +114,31 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
                                 borderRadius: BorderRadius.all(kBorderRadius),
                                 elevation: 10.0,
                                 child: Container(
-//                          height: 100.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(kBorderRadius),
-                                    color: prefs.getMainThemeColor(),
-                                  ),
-                                  child: Padding(
-                                    padding: kPadding,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            Stack(
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 25.0),
-                                                  child: Material(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(100.0),
-                                                    ),
-                                                    elevation: 10.0,
-                                                    child: ClipRRect(
-                                                      child: Image(
-                                                        height: 40.0,
-                                                        width: 40.0,
-                                                        fit: BoxFit.fitHeight,
-                                                        image: AssetImage(kPathToImages +
-                                                            currencies[arguments
-                                                                        .values
-                                                                        .first[
-                                                                    "toConvertCurrencyCode"]]
-                                                                ["img_name"]),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(100.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Material(
-                                                  elevation: 10.0,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              100.0)),
-                                                  child: ClipRRect(
-                                                    child: Image(
-                                                      height: 40.0,
-                                                      width: 40.0,
-                                                      fit: BoxFit.fitHeight,
-                                                      image: AssetImage(
-                                                        kPathToImages +
-                                                            currencies[expensesMap[
-                                                                    "expenseCurrency"]]
-                                                                ["img_name"],
-                                                      ),
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                100.0)),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 7, top: 24.0),
-                                                  child: Material(
-                                                    elevation: 10.0,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                100.0)),
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                          color: prefs
-                                                              .getThemeAccentColor(),
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      100.0))),
-                                                      child: Icon(
-                                                        Icons
-                                                            .keyboard_arrow_down,
-                                                        color: prefs
-                                                            .getThirdThemeColor(),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 5.0,
-                                            ),
-                                            TitleText(
-                                                text:
-                                                    expensesMap["expenseName"]),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            TitleText(
-                                                text:
-                                                    "${expensesMap["expenseSum"]} ${currencies[expensesMap["expenseCurrency"]]["cur_symbol"]}"),
-                                            TitleText(
-                                                text:
-                                                    "${expensesMap["convertedExpenseSum"]} ${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}"),
-                                          ],
-                                        ),
-                                      ],
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(kBorderRadius),
+                                      color: prefs.getMainThemeColor(),
                                     ),
-                                  ),
-                                ),
+                                    child: TravelExpensesCard(
+                                      expenseImageName: currencies[arguments
+                                              .values
+                                              .first["toConvertCurrencyCode"]]
+                                          ["img_name"],
+                                      toConvertImageName: currencies[
+                                              expensesMap["expenseCurrency"]]
+                                          ["img_name"],
+                                      expenseName: expensesMap["expenseName"],
+                                      expenseSum: expensesMap["expenseSum"],
+                                      expenseCurrency: currencies[
+                                              expensesMap["expenseCurrency"]]
+                                          ["cur_symbol"],
+                                      convertedSum:
+                                          expensesMap["convertedExpenseSum"],
+                                      convertedCurrency: currencies[arguments
+                                              .values
+                                              .first["toConvertCurrencyCode"]]
+                                          ["cur_symbol"],
+                                    )),
                               ),
                             ),
                             onDismissed: (direction) {
@@ -246,14 +152,15 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
                                     label: "Отменить",
                                     onPressed: () {
                                       //To undo deletion
-                                      addItem(
-                                          arguments.keys.first, keys[index], item);
+                                      addExpenseItem(arguments.keys.first,
+                                          keys[index], item);
                                     },
                                   ),
                                 ),
                               );
                               //To delete
-                              deleteItem(arguments.keys.first, keys[index]);
+                              deleteExpenseItem(
+                                  arguments.keys.first, keys[index]);
                             },
                           ),
                         ],
@@ -312,7 +219,7 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     );
   }
 
-  Map<dynamic, dynamic> getTravelCardData(int key) {
+  Map<dynamic, dynamic> getTravelCardData(String key) {
     Map retMap = Map();
     try {
       retMap = currencyPageDataBox.get(kHomePageTravelExpensesKey)[key];
@@ -322,7 +229,7 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     return retMap ?? {};
   }
 
-  Map<dynamic, dynamic> getExpensesMap(int travelCardKey) {
+  Map<dynamic, dynamic> getExpensesMap(String travelCardKey) {
     try {
       return currencyPageDataBox.get(kHomePageTravelExpensesKey)[travelCardKey];
     } catch (e) {
@@ -338,7 +245,7 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     return _expensesAmount.toStringAsFixed(2);
   }
 
-  void deleteCurrentTravelCard(int currentTravelCardKey) {
+  void deleteCurrentTravelCard(String currentTravelCardKey) {
     // Удаляем саму карточку
     Map<dynamic, dynamic> tempMap =
         currencyPageDataBox.get(kHomePageTravelCardKey);
@@ -350,13 +257,7 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
   }
 
-  void deleteItem(int travelKey, int expenseKey) {
-    /*
-    By implementing this method, it ensures that upon being dismissed from our widget tree,
-    the item is removed from our list of items and our list is updated, hence
-    preventing the "Dismissed widget still in widget tree error" when we reload.
-    */
-
+  void deleteExpenseItem(String travelKey, String expenseKey) {
     Map<dynamic, dynamic> tempMap =
         currencyPageDataBox.get(kHomePageTravelExpensesKey);
     Map<dynamic, dynamic> expenseTempMap = tempMap[travelKey];
@@ -367,11 +268,7 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     setState(() {});
   }
 
-  void addItem(int travelKey, int expenseKey, item) {
-    /*
-    This method accepts the parameters index and item and re-inserts the {item} at
-    index {index}
-    */
+  void addExpenseItem(String travelKey, String expenseKey, item) {
     Map<dynamic, dynamic> tempMap =
         currencyPageDataBox.get(kHomePageTravelExpensesKey);
     Map<dynamic, dynamic> expenseTempMap = tempMap[travelKey];
@@ -381,5 +278,4 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     updateExpensesAmount(travelKey);
     setState(() {});
   }
-
 }

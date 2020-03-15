@@ -10,7 +10,6 @@ import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
 
-
 class AddNewTravelCardPage extends StatefulWidget {
   static String id = 'addNewTravelCard';
 
@@ -110,11 +109,6 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                 TitleText(
                   text: "Валюта расходов по умолчанию:",
                 ),
-//                Text(
-//                  "Валюта расходов по умолчанию:",
-//                  textAlign: TextAlign.center,
-//                  style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
-//                ),
                 BaseCurrencyCard(
                   imgName: currencies[expensesCurrencyCode]["img_name"],
                   currencyName: currencies[expensesCurrencyCode]["cur_name"],
@@ -139,8 +133,38 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                     );
                   },
                 ),
-                TitleText(
-                  text: "Валюта конвертации:",
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      TitleText(
+                        text: "Валюта конвертации:",
+                      ),
+                      MaterialButton(
+                        color: prefs.getSecondaryThemeColor(),
+                        padding: EdgeInsets.all(0.0),
+                        minWidth: 40.0,
+                        height: 40.0,
+                        elevation: kElevationDouble,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: prefs.getThemeAccentColor(),
+                            ),
+                            borderRadius: BorderRadius.circular(100.0)),
+                        child: Icon(
+                          Icons.import_export,
+                          color: prefs.getThirdThemeColor(),
+                        ),
+                        onPressed: () {
+                          String tempValue = expensesCurrencyCode;
+                          expensesCurrencyCode = toConvertCurrencyCode;
+                          toConvertCurrencyCode = tempValue;
+                          setState(() {});
+                        },
+                      )
+                    ],
+                  ),
                 ),
                 BaseCurrencyCard(
                   imgName: currencies[toConvertCurrencyCode]["img_name"],
@@ -189,7 +213,8 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
 //                      print(months[dateFrom.month]["short"]);
                       Map<dynamic, dynamic> tempMap =
                           currencyPageDataBox.get(kHomePageTravelCardKey) ?? {};
-                      tempMap[DateTime.now().millisecondsSinceEpoch] = {
+                      tempMap[
+                          DateTime.now().millisecondsSinceEpoch.toString()] = {
                         "travelName": _travelNameController.text.toString(),
                         "dateFrom":
                             "${dateFrom.day} ${months[dateFrom.month]["short"]} ${dateFrom.year}",
@@ -200,8 +225,6 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                         "toConvertCurrencyCode": toConvertCurrencyCode,
                       };
                       currencyPageDataBox.put(kHomePageTravelCardKey, tempMap);
-//                      print(currencyPageDataBox.get(kHomePageTravelCardKey));
-//                      currencyPageDataBox.put(kHomePageTravelCardKey, {});
                       Navigator.of(context).pop();
                     }
                   },

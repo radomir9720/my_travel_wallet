@@ -54,7 +54,7 @@ class _TextInputFieldState extends State<TextInputField> {
         autofocus: widget.autoFocus,
         textAlign: TextAlign.center,
         obscureText: widget.obscure,
-        style: TextStyle(color: prefs.getThemeAccentColor()),
+        style: prefs.getMainTextStyle(),
         cursorColor: prefs.getThemeAccentColor(),
         decoration: InputDecoration(
           helperText: _isValid ? null : widget.errorText,
@@ -66,12 +66,12 @@ class _TextInputFieldState extends State<TextInputField> {
           contentPadding: EdgeInsets.all(0.0),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: _isValid ? kDarkThemeAccentColor : Colors.red,
-                width: 1.0),
+                color: _isValid ? prefs.getThemeAccentColor() : Colors.red,
+                width: kBorderWidth),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: _isValid ? kDarkThemeAccentColor : Colors.red,
+                color: _isValid ? prefs.getThemeAccentColor() : Colors.red,
                 width: 2.0),
           ),
           hintStyle: TextStyle(

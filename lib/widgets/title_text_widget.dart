@@ -15,11 +15,13 @@ class TitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(kPaddingDouble/2),
+      padding: EdgeInsets.all(kPaddingDouble / 2),
       child: Text(
         text,
         style: prefs.getMainTextStyle().copyWith(fontSize: fontSize),
         textAlign: center ? TextAlign.center : TextAlign.start,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 2,
       ),
     );
   }

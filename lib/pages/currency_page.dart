@@ -62,102 +62,104 @@ class _CurrencyPageState extends State<CurrencyPage> {
       ),
       body: Column(
         children: <Widget>[
-          Container(
-            color: prefs.getMainThemeColor(),
+          Material(
+            elevation: kElevationDouble,
+            child: Container(
+              color: prefs.getMainThemeColor(),
 //            height: 300.0,
-            child: Column(
-              children: <Widget>[
-                BaseCurrencyCard(
-                  imgName:
-                      currencyPageDataBox.get(kBaseCurrencyKey)["imageName"],
-                  currencyCode:
-                      currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"],
-                  currencyName:
-                      currencyPageDataBox.get(kBaseCurrencyKey)["currencyName"],
-                  currencySymbol: currencyPageDataBox
-                      .get(kBaseCurrencyKey)["currencySymbol"],
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      child: CurrencySearchView(),
-                    ).then((valueFromDialog) {
-                      if (valueFromDialog != null) {
-                        // Обновляем базовую валюту
-                        currencyPageDataBox.put(kBaseCurrencyKey, {
-                          "imageName":
-                              currencies[currencyNameAndCode[valueFromDialog]]
-                                  ["img_name"],
-                          "currencyCode":
-                              currencies[currencyNameAndCode[valueFromDialog]]
-                                  ["cur_code"],
-                          "currencyName":
-                              currencies[currencyNameAndCode[valueFromDialog]]
-                                  ["cur_name"],
-                          "currencySymbol":
-                              currencies[currencyNameAndCode[valueFromDialog]]
-                                  ["cur_symbol"],
-                        });
-                        // Обновляем список текущих валют на экране при смене базовой валюты. Оставляеи только доступные для конвертации валюты.
-                        // Например: если у пользователя на экране валюты USD, EUR и RUB, и пользователь меняет базовую валюту на NZD(новозеландский доллар)
-                        // то USD и EUR будут удалены, так как API сервис позволяет конвертировать из NZD ТОЛЬКО в RUB.
-                        Map<dynamic, dynamic> tempMap = currencyPageDataBox
-                            .get(kCurrencyPageToConvertCardKey);
-                        List<int> toRemove = [];
-                        currencyPageDataBox
-                            .get(kCurrencyPageToConvertCardKey)
-                            .forEach((key, value) {
-                          if (!currencies[currencyPageDataBox
-                                      .get(kBaseCurrencyKey)["currencyCode"]]
-                                  ["allowable_cur_list"]
-                              .contains(value["currencyCode"])) {
-                            toRemove.add(key);
-                          }
-                        });
-                        tempMap.removeWhere((k, v) => toRemove.contains(k));
-                        currencyPageDataBox.put(
-                            kCurrencyPageToConvertCardKey, tempMap);
-                        setState(() {});
-                      }
-                    });
-                  },
-                ),
-                TextInputField(
-                  keyboardType: TextInputType.numberWithOptions(),
-                  controller: _controller,
-//                  isValid: ((double.tryParse(_controller.text) != null &&
-//                          double.tryParse(_controller.text) > 0) ||
-//                      _controller.text == ""),
-                  checkIfIsValid: (controller) {
-                    return ((double.tryParse(controller.text) != null &&
-                            double.tryParse(controller.text) > 0) ||
-                        controller.text == "");
-                  },
-                  errorText:
-                      "Поле заполнено неправильно. Введите положительное число (может содержать точку)",
-                  hintText: "Введите сумму",
-                  onChanged: (String text) {
-                    currencyPageDataBox
-                        .put(kCurrencyPageEnterSumFieldKey, {"sum": text});
-                  },
-                ),
-                Text(
-                  "обновлено: " +
-                      (currencyPageDataBox.get(kCurrenciesUpdateTimeKey) == null
-                          ? ""
-                          : currencyPageDataBox
-                              .get(kCurrenciesUpdateTimeKey)["updatedAt"]),
-                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
-                ),
-                SizedBox(
-                  height: 4.0,
-                ),
-              ],
+              child: Column(
+                children: <Widget>[
+                  BaseCurrencyCard(
+                    imgName:
+                        currencyPageDataBox.get(kBaseCurrencyKey)["imageName"],
+                    currencyCode:
+                        currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"],
+                    currencyName:
+                        currencyPageDataBox.get(kBaseCurrencyKey)["currencyName"],
+                    currencySymbol: currencyPageDataBox
+                        .get(kBaseCurrencyKey)["currencySymbol"],
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        child: CurrencySearchView(),
+                      ).then((valueFromDialog) {
+                        if (valueFromDialog != null) {
+                          // Обновляем базовую валюту
+                          currencyPageDataBox.put(kBaseCurrencyKey, {
+                            "imageName":
+                                currencies[currencyNameAndCode[valueFromDialog]]
+                                    ["img_name"],
+                            "currencyCode":
+                                currencies[currencyNameAndCode[valueFromDialog]]
+                                    ["cur_code"],
+                            "currencyName":
+                                currencies[currencyNameAndCode[valueFromDialog]]
+                                    ["cur_name"],
+                            "currencySymbol":
+                                currencies[currencyNameAndCode[valueFromDialog]]
+                                    ["cur_symbol"],
+                          });
+                          // Обновляем список текущих валют на экране при смене базовой валюты. Оставляеи только доступные для конвертации валюты.
+                          // Например: если у пользователя на экране валюты USD, EUR и RUB, и пользователь меняет базовую валюту на NZD(новозеландский доллар)
+                          // то USD и EUR будут удалены, так как API сервис позволяет конвертировать из NZD ТОЛЬКО в RUB.
+                          Map<dynamic, dynamic> tempMap = currencyPageDataBox
+                              .get(kCurrencyPageToConvertCardKey);
+                          List<int> toRemove = [];
+                          currencyPageDataBox
+                              .get(kCurrencyPageToConvertCardKey)
+                              .forEach((key, value) {
+                            if (!currencies[currencyPageDataBox
+                                        .get(kBaseCurrencyKey)["currencyCode"]]
+                                    ["allowable_cur_list"]
+                                .contains(value["currencyCode"])) {
+                              toRemove.add(key);
+                            }
+                          });
+                          tempMap.removeWhere((k, v) => toRemove.contains(k));
+                          currencyPageDataBox.put(
+                              kCurrencyPageToConvertCardKey, tempMap);
+                          setState(() {});
+                        }
+                      });
+                    },
+                  ),
+                  TextInputField(
+                    keyboardType: TextInputType.numberWithOptions(),
+                    controller: _controller,
+                    checkIfIsValid: (controller) {
+                      return ((double.tryParse(controller.text) != null &&
+                              double.tryParse(controller.text) > 0) ||
+                          controller.text == "");
+                    },
+                    errorText:
+                        "Поле заполнено неправильно. Введите положительное число (может содержать точку)",
+                    hintText: "Введите сумму",
+                    onChanged: (String text) {
+                      currencyPageDataBox
+                          .put(kCurrencyPageEnterSumFieldKey, {"sum": text});
+                    },
+                  ),
+                  Text(
+                    "обновлено: " +
+                        (currencyPageDataBox.get(kCurrenciesUpdateTimeKey) == null
+                            ? ""
+                            : currencyPageDataBox
+                                .get(kCurrenciesUpdateTimeKey)["updatedAt"]),
+                    style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                  ),
+                  SizedBox(
+                    height: 4.0,
+                  ),
+                ],
+              ),
             ),
           ),
           Divider(
             color: prefs.getThemeAccentColor(),
+            thickness: kBorderWidth,
             height: 0.0,
           ),
+          SizedBox(height: 4.0,),
           Expanded(
             child: ValueListenableBuilder(
               valueListenable: currencyPageDataBox.listenable(),
@@ -209,13 +211,13 @@ class _CurrencyPageState extends State<CurrencyPage> {
                               label: "Отменить",
                               onPressed: () {
                                 //To undo deletion
-                                addItem(keys[index], item);
+                                addItem(keys[index].toString(), item);
                               },
                             ),
                           ),
                         );
                         //To delete
-                        deleteItem(keys[index]);
+                        deleteItem(keys[index].toString());
                       },
                     );
                   },
@@ -252,7 +254,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
                         ? addItem(
                             currencyPageDataBox
                                 .get(kCurrencyPageToConvertCardKey)
-                                .length,
+                                .length.toString(),
                             {
                                 "currencyCode": currencies[
                                         currencyNameAndCode[valueFromDialog]]

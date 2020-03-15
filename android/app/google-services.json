@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "753705363375-5bbqr4rln2scp3ooc940gve07b09qp40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "repur.ru.my_travel_wallet",
+            "certificate_hash": "06efcd893bd635614cc14ec3ecda3089ccc8f7ce"
+          }
+        },
+        {
           "client_id": "753705363375-8qnuvqdau66medecqiulngib3dumujg6.apps.googleusercontent.com",
           "client_type": 3
         }

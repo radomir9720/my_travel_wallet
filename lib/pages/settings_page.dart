@@ -3,7 +3,6 @@ import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/widgets/dialog_window.dart';
 import 'package:my_travel_wallet/widgets/settings_card.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
-import 'package:my_travel_wallet/widgets/submit_button.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({this.key});
@@ -73,6 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         detailText:
                             "Авторизация нужна для синхронизации данных. При входе в данное приложение на другом устройстве данные синхронизируются.",
                         positiveButtonFunction: () {
+                          sendDataToFirebase();
                           signOutGoogle();
                           prefs.setAuthorizedStatus(false);
                           Navigator.pop(context);

@@ -22,7 +22,7 @@ class DatePickerWidget extends StatelessWidget {
         padding: EdgeInsets.all(8.0),
         child: DateTimeField(
           controller: controller,
-          style: TextStyle(color: prefs.getThemeAccentColor()),
+          style: prefs.getMainTextStyle(),
           textAlign: TextAlign.center,
           resetIcon: Icon(
             Icons.clear,
@@ -30,6 +30,11 @@ class DatePickerWidget extends StatelessWidget {
           ),
 //          initialValue: initialValue ?? DateTime.now(),
           decoration: kInputDecoration.copyWith(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: prefs.getThemeAccentColor(),
+                ),
+              ),
               contentPadding: EdgeInsets.all(5.0),
               hintText: hintText,
               hintStyle: prefs.getMainTextStyle()),

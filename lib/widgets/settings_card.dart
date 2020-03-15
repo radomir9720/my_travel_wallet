@@ -55,6 +55,7 @@ class _SettingsCardState extends State<SettingsCard> {
           height: 0.0,
           indent: kStartIndentDividerValue,
           endIndent: kEndIndentDividerValue,
+          thickness: kBorderWidth,
         ),
       ],
     );

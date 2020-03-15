@@ -19,7 +19,7 @@ class AddNewExpenseView extends StatefulWidget {
     @required this.toConvertCurrencyCode,
   });
   final String defaultBaseCurrency;
-  final int travelCardKey;
+  final String travelCardKey;
   final String toConvertCurrencyCode;
 
   @override
@@ -228,7 +228,7 @@ class _AddNewExpenseViewState extends State<AddNewExpenseView> {
     DateTime _expenseDate = DateTime.parse(_datePickerController.text);
     travelDataTempMap[_expenseDate
         .add(Duration(microseconds: DateTime.now().millisecondsSinceEpoch))
-        .millisecondsSinceEpoch] = {
+        .millisecondsSinceEpoch.toString()] = {
       "expenseName": _expenseNameController.text,
       "expenseDate":
           "${_expenseDate.day} ${months[_expenseDate.month]["short"]} ${_expenseDate.year}",

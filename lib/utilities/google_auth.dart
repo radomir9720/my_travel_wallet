@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
-import 'dart:convert';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -40,14 +40,56 @@ void signOutGoogle() async {
 }
 
 void sendDataToFirebase() {
-  _firestore.collection(googleSignIn.currentUser.email).add({
-    "data":
-        jsonDecode(jsonEncode(currencyPageDataBox.toMap().toString())),
-    "addTime": DateTime.now(),
-  });
+  Map box = currencyPageDataBox.toMap();
+  Map<String, dynamic> toAdd = {
+    "baseCurrency": box["baseCurrency"],
+    "enterSum": box["enterSum"],
+    "toConvert": box["toConvert"],
+    "travelCard": box["travelCard"],
+    "travelCardExpenses": box["travelCardExpenses"],
+  };
+
+  _firestore
+      .collection(googleSignIn.currentUser.email)
+      .add({"data": toAdd, "addTime": DateTime.now()});
 }
 
-Future<Map<dynamic, dynamic>> getDataFromFirebase() async {
-  final data = await _firestore.collection(googleSignIn.currentUser.email).getDocuments();
-  return data.documents.last.data;
+void getDataFromFirebase() async {
+  final data = await _firestore
+      .collection(googleSignIn.currentUser.email)
+      .getDocuments();
+  if (data.documents.length > 0) {
+    saveDataToHive(data.documents.first.data["data"]);
+  }
+}
+
+void saveDataToHive(Map data) {
+  currencyPageDataBox.put(kBaseCurrencyKey, data["baseCurrency"]);
+  currencyPageDataBox.put(kCurrencyPageToConvertCardKey, data["toConvert"]);
+  currencyPageDataBox.put(kCurrencyPageEnterSumFieldKey, data["enterSum"]);
+
+  Map<dynamic, dynamic> tempMap =
+      currencyPageDataBox.get(kHomePageTravelCardKey) ?? {};
+
+  // Добавляем карточки путешествий из firebase
+  if (data["travelCard"] != null) {
+    data["travelCard"].forEach((key, value) {
+      tempMap[key] = value;
+    });
+    currencyPageDataBox.put(kHomePageTravelCardKey, tempMap);
+  }
+
+  // Добавляем расходы по каждому путешествию.
+  tempMap = currencyPageDataBox.get(kHomePageTravelExpensesKey) ?? {};
+  if (data["travelCardExpenses"] != null) {
+    Map<dynamic, dynamic> travelDataTempMap;
+    data["travelCardExpenses"].forEach((key, value) {
+      travelDataTempMap = tempMap[key] ?? {};
+      value.forEach((k, v) {
+        travelDataTempMap[k] = v;
+      });
+      tempMap[key] = travelDataTempMap;
+    });
+    currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
+  }
 }

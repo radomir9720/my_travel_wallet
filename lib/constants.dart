@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
+import 'data/main_data.dart';
+
 // ===================== CustomBottomNavigationBarButton =====================
-const double kCustomBottomNavigationBarButtonHeight = 50.0;
-const double kCustomBottomNavigationBarButtonWidth = 10.0;
+const double kCustomBottomNavigationBarButtonHeight = 47.0;
+const double kCustomBottomNavigationBarButtonWidth = 47.0;
 
 // ===================== CustomBottomNavigationBar =====================
 const double kCustomBottomNavigationBarElevation = 8.0;
 const double kCustomBottomNavigationBarBorderHeight = 1.0;
+const double kCustomBottomNavigationBarPadding = 2.0;
 
 // ===================== Theme Colors ===================== \\
 
 // Light Theme
 const Color kLightThemeMainColor = Color(0xffF3F3F6);
-const Color kLightThemeSecondaryColor = Colors.white70;
-const Color kLightThemeThirdColor = Colors.black87;
-//const Color kLightThemeAccentColor = Colors.black;
-const Color kLightThemeAccentColor = Colors.indigo;
+const Color kLightThemeSecondaryColor = Colors.white;
+const Color kLightThemeThirdColor = Colors.black;
+const Color kLightThemeAccentColor = Colors.lime;
+//const Color kLightThemeAccentColor = Colors.indigo;
 const TextStyle kLightThemeMainTextStyle = TextStyle(color: kLightThemeThirdColor);
 
 // Dark Theme
@@ -38,7 +41,7 @@ const kInputDecoration = InputDecoration(
   contentPadding:
   EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: kDarkThemeAccentColor, width: 1.0),
+    borderSide: BorderSide(color: kDarkThemeAccentColor, width: kBorderWidth),
   ),
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(color: kDarkThemeAccentColor, width: 2.0),
@@ -53,6 +56,8 @@ const double kPaddingDouble = 8.0;
 const EdgeInsets kPadding = EdgeInsets.all(kPaddingDouble);
 const double kTitleTextFontSize = 20.0;
 const String kPathToImages = "assets/images/flags/";
+const double kElevationDouble = 10.0;
+const double kBorderWidth = 1.5;
 
 // ===================== Keys ===================== \\
 

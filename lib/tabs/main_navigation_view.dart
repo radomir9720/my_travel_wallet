@@ -89,6 +89,7 @@ class _MainTabViewState extends State<MainTabView>
             color: _tabController.index == 0
                 ? prefs.getThemeAccentColor()
                 : prefs.getThirdThemeColor(),
+            isActive: _tabController.index == 0,
             icon: Icons.home,
             function: () => _tabController.index = 0,
           ),
@@ -96,12 +97,14 @@ class _MainTabViewState extends State<MainTabView>
               color: _tabController.index == 1
                   ? prefs.getThemeAccentColor()
                   : prefs.getThirdThemeColor(),
+              isActive: _tabController.index == 1,
               icon: Icons.attach_money,
               function: () => _tabController.index = 1),
           CustomBottomNavigationBarButton(
               color: _tabController.index == 2
                   ? prefs.getThemeAccentColor()
                   : prefs.getThirdThemeColor(),
+              isActive: _tabController.index == 2,
               icon: Icons.settings,
               function: () => _tabController.index = 2),
         ],

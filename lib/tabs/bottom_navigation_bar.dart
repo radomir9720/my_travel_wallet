@@ -8,7 +8,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   final List<CustomBottomNavigationBarButton> items;
 
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -18,8 +17,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: Container(
         color: prefs.getMainThemeColor(),
         height: kCustomBottomNavigationBarButtonHeight +
-            kCustomBottomNavigationBarBorderHeight,
+            kCustomBottomNavigationBarBorderHeight +
+            (kCustomBottomNavigationBarPadding * 2) +
+            1.0,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
               height: kCustomBottomNavigationBarBorderHeight,
@@ -27,9 +29,13 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 color: prefs.getThemeAccentColor(),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: items,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: kCustomBottomNavigationBarPadding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: items,
+              ),
             ),
           ],
         ),

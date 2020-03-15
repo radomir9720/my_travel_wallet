@@ -33,87 +33,91 @@ class _HomePageTravelCardState extends State<HomePageTravelCard> {
           .pushNamed(TravelPageDetail.id, arguments: widget.arguments),
       child: Padding(
         padding: kPadding,
-        child: Container(
-          padding: kPadding,
+        child: Material(
+          elevation: kElevationDouble,
+          borderRadius: BorderRadius.all(kBorderRadius),
+          child: Container(
+            padding: kPadding,
 //        height: 100.0,
-          decoration: BoxDecoration(
-            color: prefs.getMainThemeColor(),
-            borderRadius: BorderRadius.all(
-              kBorderRadius,
+            decoration: BoxDecoration(
+              color: prefs.getMainThemeColor(),
+              borderRadius: BorderRadius.all(
+                kBorderRadius,
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Flexible(
-                    child: Text(
-                      widget.travelName,
-                      overflow: TextOverflow.ellipsis,
-                      style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
-                    ),
-                  ),
-                  Text(
-                    widget.travelDates,
-                    style: prefs.getMainTextStyle(),
-                  ),
-                ],
-              ),
-              Divider(
-                color: prefs.getThemeAccentColor(),
-              ),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(kPaddingDouble/2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(kBorderRadius),
-                            color: prefs.getThemeAccentColor(),
-                          ),
-                          child: Text(
-                            "${widget.travelAmount} ${widget.travelCurrencyCode}",
-                            style: prefs.getMainTextStyle().copyWith(
-                                  fontSize: 18.0,
-                                ),
-                          ),
-                        ),
-                        Text(
-                          "Итого",
-                          style:
-                              prefs.getMainTextStyle().copyWith(fontSize: 15.0),
-                        ),
-                      ],
+                    Flexible(
+                      child: Text(
+                        widget.travelName,
+                        overflow: TextOverflow.ellipsis,
+                        style: prefs.getMainTextStyle().copyWith(fontSize: 20.0),
+                      ),
                     ),
-                    SmallButton(
-                      buttonTitle: "Добавить расход",
-                      onPressed: () {
-//                        print(widget.arguments);
-                        showDialog(
-                          context: context,
-                          child: Scaffold(
-                            backgroundColor: Colors.black.withOpacity(0.1),
-                            body: AddNewExpenseView(
-                              defaultBaseCurrency: widget.arguments
-                                  .values.first["defaultExpensesCurrencyCode"],
-                              travelCardKey: widget.arguments.keys.first,
-                              toConvertCurrencyCode:
-                              widget.arguments.values.first["toConvertCurrencyCode"],
+                    Text(
+                      widget.travelDates,
+                      style: prefs.getMainTextStyle(),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: prefs.getThemeAccentColor(),
+                ),
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(kPaddingDouble/2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(kBorderRadius),
+                              color: prefs.getThemeAccentColor(),
+                            ),
+                            child: Text(
+                              "${widget.travelAmount} ${widget.travelCurrencyCode}",
+                              style: prefs.getMainTextStyle().copyWith(
+                                    fontSize: 18.0,
+                                  ),
                             ),
                           ),
-                        );
-                      },
-                      height: 40.0,
-                    ),
-                  ])
-            ],
+                          Text(
+                            "Итого",
+                            style:
+                                prefs.getMainTextStyle().copyWith(fontSize: 15.0),
+                          ),
+                        ],
+                      ),
+                      SmallButton(
+                        buttonTitle: "Добавить расход",
+                        onPressed: () {
+//                        print(widget.arguments);
+                          showDialog(
+                            context: context,
+                            child: Scaffold(
+                              backgroundColor: Colors.black.withOpacity(0.1),
+                              body: AddNewExpenseView(
+                                defaultBaseCurrency: widget.arguments
+                                    .values.first["defaultExpensesCurrencyCode"],
+                                travelCardKey: widget.arguments.keys.first,
+                                toConvertCurrencyCode:
+                                widget.arguments.values.first["toConvertCurrencyCode"],
+                              ),
+                            ),
+                          );
+                        },
+                        height: 40.0,
+                      ),
+                    ])
+              ],
+            ),
           ),
         ),
       ),

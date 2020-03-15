@@ -6,7 +6,6 @@ import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/utilities/shared_preferences.dart';
 import 'package:hive/hive.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ============================== Shared Preferences ============================== \\
 
@@ -46,7 +45,7 @@ void initCurrencyPageData() async {
   }
   if (currencyPageDataBox.get(kCurrencyPageToConvertCardKey) == null) {
     currencyPageDataBox.put(kCurrencyPageToConvertCardKey, {
-      0: {
+      "0": {
         "currencyCode": currencies["RUB"]["cur_code"],
       }
     });
