@@ -104,7 +104,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
                           // то USD и EUR будут удалены, так как API сервис позволяет конвертировать из NZD ТОЛЬКО в RUB.
                           Map<dynamic, dynamic> tempMap = currencyPageDataBox
                               .get(kCurrencyPageToConvertCardKey);
-                          List<int> toRemove = [];
+                          List<String> toRemove = [];
                           currencyPageDataBox
                               .get(kCurrencyPageToConvertCardKey)
                               .forEach((key, value) {
