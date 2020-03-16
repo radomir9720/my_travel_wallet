@@ -13,7 +13,7 @@ class MainTabView extends StatefulWidget {
 }
 
 List<Widget> pages;
-
+FocusNode currencyPageFocusNode;
 
 class _MainTabViewState extends State<MainTabView>
     with SingleTickerProviderStateMixin {
@@ -31,7 +31,7 @@ class _MainTabViewState extends State<MainTabView>
   @override
   void initState() {
     super.initState();
-//    mySharedPreferences.init();
+    currencyPageFocusNode = FocusNode();
 
     _homePage = HomePage(
       key: PageStorageKey(0),
@@ -69,6 +69,7 @@ class _MainTabViewState extends State<MainTabView>
     super.dispose();
     prefs.dispose();
     _tabController.dispose();
+    currencyPageFocusNode.dispose();
   }
 
   @override
@@ -90,7 +91,7 @@ class _MainTabViewState extends State<MainTabView>
                 ? prefs.getThemeAccentColor()
                 : prefs.getThirdThemeColor(),
             isActive: _tabController.index == 0,
-            icon: Icons.home,
+            icon: Icons.local_airport,
             function: () => _tabController.index = 0,
           ),
           CustomBottomNavigationBarButton(
@@ -106,7 +107,10 @@ class _MainTabViewState extends State<MainTabView>
                   : prefs.getThirdThemeColor(),
               isActive: _tabController.index == 2,
               icon: Icons.settings,
-              function: () => _tabController.index = 2),
+              function: () {
+                _tabController.index = 2;
+                currencyPageFocusNode.unfocus();
+              }),
         ],
       ),
     );

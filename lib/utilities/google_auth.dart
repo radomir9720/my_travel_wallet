@@ -28,7 +28,7 @@ Future<String> signInWithGoogle() async {
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
 
-    return 'Юзер залогинен: ${user.email}';
+    return 'OK';
   }
   return 'Юзер отменил авторизацию';
 }
@@ -49,6 +49,7 @@ void sendDataToFirebase() {
     "travelCardExpenses": box["travelCardExpenses"],
   };
 
+  _firestore.collection("collection");
   _firestore
       .collection(googleSignIn.currentUser.email)
       .add({"data": toAdd, "addTime": DateTime.now()});
@@ -57,6 +58,7 @@ void sendDataToFirebase() {
 void getDataFromFirebase() async {
   final data = await _firestore
       .collection(googleSignIn.currentUser.email)
+      .orderBy('addTime', descending: true)
       .getDocuments();
   if (data.documents.length > 0) {
     saveDataToHive(data.documents.first.data["data"]);

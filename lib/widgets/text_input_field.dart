@@ -13,6 +13,7 @@ class TextInputField extends StatefulWidget {
     this.onChanged,
     this.errorText,
     this.checkIfIsValid,
+    this.focusNode,
   });
 
   final String hintText;
@@ -23,6 +24,7 @@ class TextInputField extends StatefulWidget {
   final Function onChanged;
   final String errorText;
   final Function checkIfIsValid;
+  final FocusNode focusNode;
 
   @override
   _TextInputFieldState createState() => _TextInputFieldState();
@@ -42,11 +44,13 @@ class _TextInputFieldState extends State<TextInputField> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: kPadding,
       child: TextField(
+        focusNode: widget.focusNode,
         key: widget.key,
         keyboardType: widget.keyboardType,
         onChanged: (text) => widget.onChanged(text),

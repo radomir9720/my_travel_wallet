@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/functions/get_currency_value_with_fixed_length.dart';
 import 'package:my_travel_wallet/widgets/round_country_flag_image.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
 
@@ -75,8 +76,8 @@ class TravelExpensesCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TitleText(text: "$expenseSum $expenseCurrency"),
-              TitleText(text: "$convertedSum $convertedCurrency"),
+              TitleText(text: getCurrencyValueWithFixedLength(double.tryParse(expenseSum), expenseCurrency)),
+              TitleText(text: getCurrencyValueWithFixedLength(double.tryParse(convertedSum), convertedCurrency)),
             ],
           ),
         ],

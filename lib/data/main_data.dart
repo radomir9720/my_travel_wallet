@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/utilities/api.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
@@ -14,11 +13,24 @@ MySharedPreferences prefs = MySharedPreferences();
 
 List<String> currencyListInit = [];
 Map<String, String> currencyNameAndCode = {};
+bool sessionWithConnection = false;
 
 void initializeData() async {
   await prefs.init();
   await initCurrencyPageData();
-  if (prefs.getAuthorizedStatus()) await signInWithGoogle();
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      sessionWithConnection = true;
+    }
+  } on SocketException catch (_) {
+    print('not connected');
+  }
+  try {
+    if (prefs.getAuthorizedStatus() && sessionWithConnection)
+      await signInWithGoogle();
+  } catch (_) {}
+
 //  baseCurrencyCardData.init();
   currencies.values.forEach((e) => currencyListInit.add(e["cur_name"]));
   currencies.values.forEach(
@@ -65,4 +77,3 @@ void initCurrencyPageData() async {
 //  Map test = await getDataFromFirebase();
 //  print(test);
 }
-

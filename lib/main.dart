@@ -4,6 +4,7 @@ import 'package:my_travel_wallet/pages/home_page/add_new_travel_card_page.dart';
 import 'package:my_travel_wallet/pages/registartion_and_sign_in/registration_sign_in_tab_view.dart';
 import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/widgets/custom_progress_indicator.dart';
 import 'package:my_travel_wallet/widgets/travel_page_detail.dart';
 
 void main() => runApp(MyTravelWallet());
@@ -17,10 +18,7 @@ class _MyTravelWalletState extends State<MyTravelWallet> {
   Widget body = Container(
     height: 100.0,
     child: Center(
-      child: CircularProgressIndicator(
-        backgroundColor: Colors.white,
-//        valueColor: Colors.black,
-      ),
+      child: CustomCircularProgressIndicator()
     ),
   );
 

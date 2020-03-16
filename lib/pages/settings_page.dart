@@ -59,7 +59,7 @@ class _SettingsPageState extends State<SettingsPage> {
               showDialog(
                 context: context,
                 // Проверка залогинен ли пользователь
-                child: googleSignIn.currentUser == null
+                child: (googleSignIn.currentUser?.id == null || !sessionWithConnection)
                     // Если не залогинен, выводим диалоговое окно с данной информацией
                     ? DialogWindow(
                         mainText: "Вы не авторизованы",

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'data/main_data.dart';
-
 // ===================== CustomBottomNavigationBarButton =====================
 const double kCustomBottomNavigationBarButtonHeight = 47.0;
 const double kCustomBottomNavigationBarButtonWidth = 47.0;
@@ -17,7 +15,7 @@ const double kCustomBottomNavigationBarPadding = 2.0;
 const Color kLightThemeMainColor = Color(0xffF3F3F6);
 const Color kLightThemeSecondaryColor = Colors.white;
 const Color kLightThemeThirdColor = Colors.black;
-const Color kLightThemeAccentColor = Colors.lime;
+const Color kLightThemeAccentColor = Colors.blue;
 //const Color kLightThemeAccentColor = Colors.indigo;
 const TextStyle kLightThemeMainTextStyle = TextStyle(color: kLightThemeThirdColor);
 
@@ -68,8 +66,6 @@ const String kScreenHeightKey = 'screenHeight';
 const String kIsAuthorizedStatusKey = 'isAuthorized';
 const String kCurrencyPageDataKey = 'currencyPageData';
 const String kCurrencyPageToConvertCardKey = 'toConvert';
-//const String kHiveBoxDataKey = 'hiveBoxData';
-//const String kHiveBoxDataBaseCurrencyKey = 'baseCurrency';
 const String kCurrencyPageValueKey = 'currencyValue';
 const String kCurrenciesUpdateTimeKey = 'updatedAt';
 const String kCurrencyPageEnterSumFieldKey = 'enterSum';

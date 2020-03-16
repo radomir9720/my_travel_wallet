@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/functions/get_currency_value_with_fixed_length.dart';
 import 'package:my_travel_wallet/widgets/round_country_flag_image.dart';
 
 class ToConvertCurrencyCard extends StatefulWidget {
@@ -71,7 +72,9 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                           width: MediaQuery.of(context).size.width * 0.4,
                           child: Text(
                             widget.currencyName,
-                            style: prefs.getMainTextStyle().copyWith(fontSize: 16.0),
+                            style: prefs
+                                .getMainTextStyle()
+                                .copyWith(fontSize: 16.0),
                             overflow: TextOverflow.ellipsis,
                             softWrap: false,
                           ),
@@ -93,8 +96,10 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
                           ),
                         ),
                         child: Text(
-                          getCurrencyValueWithFixedLength(widget.currencyValue,
-                              widget.enteredSum, widget.currencySymbol),
+                          getCurrencyValueWithFixedLength(
+                              getMultipliedValue(
+                                  widget.currencyValue, widget.enteredSum),
+                              widget.currencySymbol),
                           style:
                               prefs.getMainTextStyle().copyWith(fontSize: 17.0),
 //                          TextStyle(
@@ -122,7 +127,8 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
             width: double.infinity,
             height: 60.0,
             decoration: BoxDecoration(
-              border: Border.all(color: prefs.getThemeAccentColor(), width: kBorderWidth),
+              border: Border.all(
+                  color: prefs.getThemeAccentColor(), width: kBorderWidth),
               borderRadius: BorderRadius.all(kBorderRadius),
             ),
           ),
@@ -131,26 +137,9 @@ class _ToConvertCurrencyCardState extends State<ToConvertCurrencyCard> {
     );
   }
 
-  String getCurrencyValueWithFixedLength(
-      String currencyValue, String enteredSum, String currencySymbol) {
-    double doubleValue = ((double.tryParse(currencyValue) ?? 1) *
+  double getMultipliedValue(String enteredSum, String currencyValue) {
+    return ((double.tryParse(currencyValue) ?? 1) *
         (double.tryParse(enteredSum) ?? 1));
-    String retValue;
-    if (doubleValue > 1000000000000) {
-      retValue = (doubleValue / 1000000000000).toStringAsFixed(2) +
-          " трлн $currencySymbol";
-    } else if (doubleValue > 1000000000) {
-      retValue = (doubleValue / 1000000000).toStringAsFixed(2) +
-          " млрд $currencySymbol";
-    } else if (doubleValue > 1000000) {
-      retValue =
-          (doubleValue / 1000000).toStringAsFixed(2) + " млн $currencySymbol";
-    } else if (doubleValue > 100000) {
-      retValue =
-          (doubleValue / 1000).toStringAsFixed(2) + " тыс $currencySymbol";
-    } else {
-      retValue = doubleValue.toStringAsFixed(2) + " $currencySymbol";
-    }
-    return retValue;
   }
+
 }

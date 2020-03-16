@@ -16,6 +16,8 @@ class DialogWindowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      color: prefs.getMainThemeColor(),
+      elevation: kElevationDouble,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kBorderRadiusDouble),
           side: BorderSide(color: prefs.getThemeAccentColor())),

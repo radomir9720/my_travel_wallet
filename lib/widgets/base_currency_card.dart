@@ -31,6 +31,7 @@ class _BaseCurrencyCardState extends State<BaseCurrencyCard> {
       padding: kPadding,
       child: Material(
         elevation: kElevationDouble,
+        borderRadius: BorderRadius.all(kBorderRadius),
         child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
           Container(
             padding: EdgeInsets.all(5.0),

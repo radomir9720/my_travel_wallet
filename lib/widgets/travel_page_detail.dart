@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/functions/get_currency_value_with_fixed_length.dart';
 import 'package:my_travel_wallet/pages/home_page/functions/updateTravelCardExpensesAmount.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/pages/home_page/add_new_expense_view.dart';
@@ -183,9 +184,14 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
                     children: <Widget>[
                       TitleText(text: "Итого:"),
                       TitleText(
-                          text:
-                              "${getExpensesAmount(getExpensesMap(arguments.keys.first))} "
-                              "${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}")
+                          text: getCurrencyValueWithFixedLength(
+                              double.tryParse(getExpensesAmount(
+                                  getExpensesMap(arguments.keys.first))),
+                              currencies[arguments
+                                      .values.first["toConvertCurrencyCode"]]
+                                  ["cur_symbol"])),
+//                              "${getExpensesAmount(getExpensesMap(arguments.keys.first))} "
+//                              "${currencies[arguments.values.first["toConvertCurrencyCode"]]["cur_symbol"]}")
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
@@ -253,8 +259,10 @@ class _TravelPageDetailState extends State<TravelPageDetail> {
     currencyPageDataBox.put(kHomePageTravelCardKey, tempMap);
     // Удаляем расходы по этой карточке
     tempMap = currencyPageDataBox.get(kHomePageTravelExpensesKey);
-    tempMap.remove(currentTravelCardKey);
-    currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
+    if ((tempMap??{}).containsKey(currentTravelCardKey)) {
+      tempMap.remove(currentTravelCardKey);
+      currencyPageDataBox.put(kHomePageTravelExpensesKey, tempMap);
+    }
   }
 
   void deleteExpenseItem(String travelKey, String expenseKey) {

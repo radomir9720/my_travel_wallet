@@ -193,14 +193,20 @@ class _AddNewTravelCardPageState extends State<AddNewTravelCardPage> {
                 SubmitButton(
                   buttonTitle: "Добавить путешествие",
                   onPressed: () {
+                    String errorText = "";
                     if (_travelNameController.text.length == 0 ||
                         _travelNameController.text.length > 25) {
+                      errorText += "\n - Поле с названием страны должно содержать от 1 до 25 символов";
+                    } if (_dateFromController.text == "" || _dateToController.text == "") {
+                      errorText += "\n - Поля с датами должны быть заполнены";
+                    }
+                    if (errorText != "") {
                       showDialog(
                         context: context,
                         child: DialogWindow(
-                          mainText: "Введите страну назначения!",
-                          detailText:
-                              "Поле с названием страны должно содержать от 1 до 25 символов",
+                          mainText: "Заполните поля!",
+                          detailText: errorText,
+//                              "Поле с названием страны должно содержать от 1 до 25 символов",
                           neutralButtonText: "Понятно",
                           neutralButtonFunction: () =>
                               Navigator.of(context).pop(),

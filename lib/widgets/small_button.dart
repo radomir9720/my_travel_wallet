@@ -10,8 +10,7 @@ class SmallButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () => onPressed(),
-height: height,
-//      height: 40.0,
+      height: height,
       child: Text(
         buttonTitle,
         style: prefs.getMainTextStyle(),

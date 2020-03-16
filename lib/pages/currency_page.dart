@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travel_wallet/constants.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
+import 'package:my_travel_wallet/tabs/main_navigation_view.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/widgets/base_currency_card.dart';
 import 'package:my_travel_wallet/widgets/currency_search_view.dart';
@@ -29,11 +30,13 @@ class _CurrencyPageState extends State<CurrencyPage> {
     super.initState();
   }
 
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
 
   String getCurrencyValue(index) {
     String value;
@@ -72,10 +75,10 @@ class _CurrencyPageState extends State<CurrencyPage> {
                   BaseCurrencyCard(
                     imgName:
                         currencyPageDataBox.get(kBaseCurrencyKey)["imageName"],
-                    currencyCode:
-                        currencyPageDataBox.get(kBaseCurrencyKey)["currencyCode"],
-                    currencyName:
-                        currencyPageDataBox.get(kBaseCurrencyKey)["currencyName"],
+                    currencyCode: currencyPageDataBox
+                        .get(kBaseCurrencyKey)["currencyCode"],
+                    currencyName: currencyPageDataBox
+                        .get(kBaseCurrencyKey)["currencyName"],
                     currencySymbol: currencyPageDataBox
                         .get(kBaseCurrencyKey)["currencySymbol"],
                     onPressed: () {
@@ -124,6 +127,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
                     },
                   ),
                   TextInputField(
+                    focusNode: currencyPageFocusNode,
                     keyboardType: TextInputType.numberWithOptions(),
                     controller: _controller,
                     checkIfIsValid: (controller) {
@@ -139,13 +143,20 @@ class _CurrencyPageState extends State<CurrencyPage> {
                           .put(kCurrencyPageEnterSumFieldKey, {"sum": text});
                     },
                   ),
-                  Text(
-                    "обновлено: " +
-                        (currencyPageDataBox.get(kCurrenciesUpdateTimeKey) == null
-                            ? ""
-                            : currencyPageDataBox
-                                .get(kCurrenciesUpdateTimeKey)["updatedAt"]),
-                    style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                  ValueListenableBuilder(
+                    valueListenable: currencyPageDataBox.listenable(),
+                    builder: (context, currencyPageDataBox, widget) {
+                      return Text(
+                        "обновлено: " +
+                            (currencyPageDataBox
+                                        .get(kCurrenciesUpdateTimeKey) ==
+                                    null
+                                ? ""
+                                : currencyPageDataBox.get(
+                                    kCurrenciesUpdateTimeKey)["updatedAt"]),
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 4.0,
@@ -159,7 +170,9 @@ class _CurrencyPageState extends State<CurrencyPage> {
             thickness: kBorderWidth,
             height: 0.0,
           ),
-          SizedBox(height: 4.0,),
+          SizedBox(
+            height: 4.0,
+          ),
           Expanded(
             child: ValueListenableBuilder(
               valueListenable: currencyPageDataBox.listenable(),
@@ -254,7 +267,8 @@ class _CurrencyPageState extends State<CurrencyPage> {
                         ? addItem(
                             currencyPageDataBox
                                 .get(kCurrencyPageToConvertCardKey)
-                                .length.toString(),
+                                .length
+                                .toString(),
                             {
                                 "currencyCode": currencies[
                                         currencyNameAndCode[valueFromDialog]]
@@ -314,5 +328,4 @@ class _CurrencyPageState extends State<CurrencyPage> {
 //      listItems.insert(index, item);
 //    });
   }
-
 }
