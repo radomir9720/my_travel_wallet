@@ -1,16 +1,16 @@
-# my_travel_wallet
+# My Travel Wallet
 
 Приложение для учета финансов в путешествиях.
 
-## Getting Started
+## Пет-проект, цель которого - "прощупать почву" в разработке мобильных приложений.
 
-This project is a starting point for a Flutter application.
+## Дисклеймер:
+Не стоит искать в этом приложении изъяны и несостыковки(вы их обязательтно найдете). Некоторые моменты реализованы неправильно из-за неопытности и незнания как правильно, некоторые из-за ограничения во времени, которое было уделено под этот проект.
 
-A few resources to get you started if this is your first Flutter project:
+## Цель и полезность приложения:
+Приложение поможет путешественникам следить за финансами. Отличие этого приложения от других "кошельков" - конвертер валют. Вы всегда будете видеть эквивалент в валюте, в которой привыкли считать.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Разделы приложения:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*Главная страница с путешествиями:
+![GitHub Logo](https://downloader.disk.yandex.ru/preview/a213f42ac01e91c92b3986eabaae8d692052407133272c8ba1e9c6be5ebdda40/5e70e90b/DRpIBSzsP51Xp0aILn-4tjl40WubFZ-1hbsWUclWJX6DeVPqy2KkePjdjktcEDAKhV9wsdl8-TWBTxUAPuknRg==?uid=0&filename=home_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
