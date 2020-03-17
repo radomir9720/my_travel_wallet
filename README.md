@@ -53,13 +53,13 @@
 
 # Инструменты, используемые в реализации:
 
-* Хранение данных:
+#### Хранение данных:
  * Hive
  * Shared preferences
  * Google Firebase
  
-* Api:
+#### Api:
  * http://currate.ru/
  
-* Авторизация:
+#### Авторизация:
  * Google sign in.
