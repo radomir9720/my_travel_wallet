@@ -30,6 +30,7 @@
 ![GitHub Logo](https://downloader.disk.yandex.ru/preview/e094bf7913d210a5f078ea17313c8323f7bf3cca37be61edf6981b7616d2d4b4/5e70ecd2/OrOPFgBoFxs1OfdGTsVbzfPAOmKQcINwNpqe3Hv7CpkUCsSwWgbLIjZFMP-G7amQp9ACyMkTYMuEYjz0dzHKGQ==?uid=0&filename=add_new_travel.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
 
 * Страница с конвертацией валют:
+
 ![GitHub Logo](https://downloader.disk.yandex.ru/preview/ce02c456539ea2f598a9dc3201e2fac4c37d058186b9a2c368a91ba2c80870ae/5e70f36f/EQhs882bSEG1Q0UkDpA-CodSiBA7LeCJEUrOeDvG4ngu_Qhi9m3-RG8JSbZ1i063OBVDcp8Oyw2c_fv_ttk7pg==?uid=0&filename=currency_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
 
  * Функционал:
@@ -39,6 +40,7 @@
   * Есть возможность ввода суммы в поле(валидируется). При вводе значений в это поле сумма конвертируется в режиме онлайн.
 
 * Страница с настройками.
+
 ![GitHub Logo]
 (https://downloader.disk.yandex.ru/preview/bad4badb29542f8181c9a154ef60ad630ed00c1ca9edf90a9079d48d5607b9dd/5e70f392/0u7x3Oa0l2LQ-R5jaZRVGCE7es_6DRuG-aEvJn7Yd0H_GlWuWzjrYCbQ-Z8p0X0Sld0FksSDdDCLWz--5YuBHA==?uid=0&filename=settings_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
 
