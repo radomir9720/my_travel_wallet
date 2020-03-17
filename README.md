@@ -34,6 +34,7 @@
 ![GitHub Logo](https://downloader.disk.yandex.ru/preview/ce02c456539ea2f598a9dc3201e2fac4c37d058186b9a2c368a91ba2c80870ae/5e70f36f/EQhs882bSEG1Q0UkDpA-CodSiBA7LeCJEUrOeDvG4ngu_Qhi9m3-RG8JSbZ1i063OBVDcp8Oyw2c_fv_ttk7pg==?uid=0&filename=currency_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
 
  * Функционал:
+ 
   * Выбор базовой валюты.
   * Добавление/удаление валют для конвертации(при добавлении осуществляется проверка на возможность конвертации из базовой валюты. Пользователю к выбору будут предоставлены только валюты, в которые можно сконвертировать денежные единицы).
   * Конвертация валюты из базовой в выбранные пользователем.
@@ -44,6 +45,7 @@
 ![GitHub Logo](https://downloader.disk.yandex.ru/preview/bad4badb29542f8181c9a154ef60ad630ed00c1ca9edf90a9079d48d5607b9dd/5e70f392/0u7x3Oa0l2LQ-R5jaZRVGCE7es_6DRuG-aEvJn7Yd0H_GlWuWzjrYCbQ-Z8p0X0Sld0FksSDdDCLWz--5YuBHA==?uid=0&filename=settings_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
 
  * Функционал:
+ 
   * Смена темы со светлой на темную и наоборот.
    Работает без перезапуска приложения, естественно.
   * Выход из аккаунта G+(при выходе так же делается снимок состояния приложения и сохраняется в firebase).
