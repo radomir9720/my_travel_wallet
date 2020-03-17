@@ -73,7 +73,5 @@ void initCurrencyPageData() async {
     }
   });
   ApiData().initApiData(_allPairs);
-//  if (googleSignIn.currentUser != null && currencyPageDataBox.get(key))
-//  Map test = await getDataFromFirebase();
-//  print(test);
+
 }

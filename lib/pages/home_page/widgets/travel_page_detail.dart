@@ -4,13 +4,13 @@ import 'package:my_travel_wallet/data/main_data.dart';
 import 'package:my_travel_wallet/functions/get_currency_value_with_fixed_length.dart';
 import 'package:my_travel_wallet/pages/home_page/functions/updateTravelCardExpensesAmount.dart';
 import 'package:my_travel_wallet/utilities/currencies.dart';
-import 'package:my_travel_wallet/pages/home_page/add_new_expense_view.dart';
+import 'package:my_travel_wallet/pages/home_page/widgets/add_new_expense_view.dart';
 import 'package:my_travel_wallet/widgets/dialog_window.dart';
 import 'package:my_travel_wallet/widgets/stack_behind_dismiss.dart';
 import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
-import 'package:my_travel_wallet/widgets/travel_expenses_card.dart';
+import 'package:my_travel_wallet/pages/home_page/widgets/travel_expenses_card.dart';
 
 class TravelPageDetail extends StatefulWidget {
   static String id = 'travelPageDetail';

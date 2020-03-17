@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_travel_wallet/utilities/google_auth.dart';
 import 'package:my_travel_wallet/widgets/dialog_window.dart';
-import 'package:my_travel_wallet/widgets/settings_card.dart';
+import 'package:my_travel_wallet/pages/settings_page/widgets/settings_card.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
 class SettingsPage extends StatefulWidget {

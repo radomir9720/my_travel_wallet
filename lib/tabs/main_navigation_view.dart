@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_travel_wallet/pages/currency_page.dart';
+import 'package:my_travel_wallet/pages/currency_page/currency_page.dart';
 import 'package:my_travel_wallet/pages/home_page/home_page.dart';
 import 'package:my_travel_wallet/tabs/bottom_navigation_bar.dart';
 import 'package:my_travel_wallet/tabs/bottom_navigation_bar_button.dart';
-import 'package:my_travel_wallet/pages/settings_page.dart';
+import 'package:my_travel_wallet/pages/settings_page/settings_page.dart';
 import 'package:my_travel_wallet/data/main_data.dart';
 
 class MainTabView extends StatefulWidget {

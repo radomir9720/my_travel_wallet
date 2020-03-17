@@ -4,7 +4,7 @@ import 'package:my_travel_wallet/functions/get_currency_value_with_fixed_length.
 import 'package:my_travel_wallet/widgets/round_country_flag_image.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
 
-import '../constants.dart';
+import '../../../constants.dart';
 
 class TravelExpensesCard extends StatelessWidget {
   TravelExpensesCard({

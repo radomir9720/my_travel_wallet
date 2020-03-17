@@ -8,9 +8,9 @@ import 'package:my_travel_wallet/widgets/submit_button.dart';
 import 'package:my_travel_wallet/widgets/text_input_field.dart';
 import 'package:my_travel_wallet/widgets/title_text_widget.dart';
 
-import '../../constants.dart';
-import '../../widgets/date_picker_widget.dart';
-import 'functions/updateTravelCardExpensesAmount.dart';
+import '../../../constants.dart';
+import '../../../widgets/date_picker_widget.dart';
+import '../functions/updateTravelCardExpensesAmount.dart';
 
 class AddNewExpenseView extends StatefulWidget {
   AddNewExpenseView({

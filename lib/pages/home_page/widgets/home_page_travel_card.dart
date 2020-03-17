@@ -4,10 +4,10 @@ import 'package:my_travel_wallet/functions/get_currency_value_with_fixed_length.
 import 'package:my_travel_wallet/utilities/currencies.dart';
 import 'package:my_travel_wallet/widgets/round_country_flag_image.dart';
 import 'package:my_travel_wallet/widgets/small_button.dart';
-import 'package:my_travel_wallet/widgets/travel_page_detail.dart';
+import 'package:my_travel_wallet/pages/home_page/widgets/travel_page_detail.dart';
 
-import '../constants.dart';
-import '../pages/home_page/add_new_expense_view.dart';
+import '../../../constants.dart';
+import 'add_new_expense_view.dart';
 
 class HomePageTravelCard extends StatefulWidget {
   HomePageTravelCard(
