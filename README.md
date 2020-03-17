@@ -55,10 +55,10 @@
 
 * Хранение данных:
 
-* Hive
-* Shared preferences
-* Google Firebase
-
+ * Hive
+ * Shared preferences
+ * Google Firebase
+ 
 * Api:
  
  * http://currate.ru/
