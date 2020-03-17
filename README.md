@@ -12,5 +12,5 @@
 
 ## Разделы приложения:
 
-*Главная страница с путешествиями:
+* Главная страница с путешествиями:
 ![GitHub Logo](https://downloader.disk.yandex.ru/preview/a213f42ac01e91c92b3986eabaae8d692052407133272c8ba1e9c6be5ebdda40/5e70e90b/DRpIBSzsP51Xp0aILn-4tjl40WubFZ-1hbsWUclWJX6DeVPqy2KkePjdjktcEDAKhV9wsdl8-TWBTxUAPuknRg==?uid=0&filename=home_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=172518326&size=2048x2048)
