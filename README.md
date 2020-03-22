@@ -10,7 +10,7 @@
 
 ### Главная страница с путешествиями:
 
-![GitHub Logo](https://disk.yandex.ru/client/disk/скрины%20%20my_travel_wallet?idApp=client&dialog=slider&idDialog=%2Fdisk%2Fскрины%20%20my_travel_wallet%2Fhome_page.png)
+![GitHub Logo](https://3.downloader.disk.yandex.ru/preview/8569154fcac4dfe8be5ec29e3e0892d993b0fd764e8595e199e604345b9e1f81/inf/DRpIBSzsP51Xp0aILn-4tjl40WubFZ-1hbsWUclWJX6DeVPqy2KkePjdjktcEDAKhV9wsdl8-TWBTxUAPuknRg%3D%3D?uid=172518326&filename=home_page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=172518326&tknv=v2&size=1894x909)
 
   * Функционал:
   
